@@ -225,7 +225,7 @@ list_line_ylabel = [
   "Throughput (1/s)"                                 # 19
 ]
 
-plt.rcParams.update({'font.size': 15})
+plt.rcParams.update({'font.size': 20})
 
 def plotLogs(a,h,nRob,p,option,nSamples,data,varValues):
   for s in range(nSamples[a]):
@@ -260,7 +260,7 @@ def mainLoop(option):
         imgLocation = "AnglesRobots"+algorithmsLabels[a]+str(numRobotsList[nRob])+holoSubStr[h]+str(option)
         print(imgLocation + ".pdf generated.")
         plt.savefig(imgLocation+".pdf",bbox_inches="tight",pad_inches=0.001);
-        plt.show()
+        # ~ plt.show()
         plt.clf()
   
 mainLoop(10)
