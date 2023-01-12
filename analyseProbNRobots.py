@@ -240,6 +240,76 @@ def mainLoop(option,doFitting = False):
         # ~ plt.show();
         plt.clf()
 
+def sumOverRobots(option):
+  
+  # Test for NoCoord as alternative and SQF or TRVF by the knowing robots.
+  algorithmAlternativeDir=["NoCoordAlt/","NoCoordAlt/"]
+  algorithmsLabels = ["SQF","TRVF"];
+  algorithmsLabels2 = ["No c.","No c."]
+  prefixImgFile = "NoCoordalt"
+  
+  
+  # ~ # Same as above, but one element per array.
+  # ~ algorithmAlternativeDir=["NoCoordAlt/"]
+  # ~ algorithmsLabels = ["SQF"];
+  # ~ algorithmsLabels = ["TRVF"];
+  # ~ algorithmsLabels2 = ["No c."]
+  
+  # ~ # Test for TRVF as alternative and SQF by the knowing robots.
+  # ~ algorithmAlternativeDir=["TRVFAlt/","TRVFAlt/"]
+  # ~ algorithmsLabels = ["SQF"];
+  # ~ algorithmsLabels2 = ["TRVF","No c."]
+  # ~ prefixImgFile = "TRVFaltSQFknowing"
+  
+  # ~ # Test for SQF as alternative and TRVF by the knowing robots.
+  # ~ algorithmAlternativeDir=["SQFAlt/","SQFAlt/"]
+  # ~ algorithmsLabels = ["TRVF"];
+  # ~ algorithmsLabels2 = ["SQF","No c."]
+  # ~ prefixImgFile = "SQFaltTRVFknowing"
+  
+  suffix_file_list = ['nonholo','holo']
+  
+  algDirPrefixes1_1 = dictHoloNonHolo(algorithmsLabels,algorithmDirectoriesHolo2,algorithmDirectoriesNonHolo2)
+  algDirPrefixes2_1 = dictHoloNonHolo(algorithmsLabels2,algorithmDirectoriesHolo2,algorithmDirectoriesNonHolo2)
+  
+  # ~ algDirPrefixes = dictHoloNonHolo(algorithmsLabels,algorithmDirectoriesHolo,algorithmDirectoriesNonHolo)
+  # ~ algDirPrefixes2 = dictHoloNonHolo(algorithmsLabels2,=algorithmDirectoriesHolo,algorithmDirectoriesNonHolo)
+  prefixNumRobots = "robots_"
+  prefixNumFollowingRobots = "m_"
+  
+  algorithmsSymbol = ["."]*(len(algorithmsLabels)+len(algorithmsLabels2));
+  numPercentValues = range(10, 91, 10)
+  numRobotsValues = range(20, 301, 20)
+  nSamples = 40
+
+  datalines = 19+1
+  
+  dataMeanProb2,dataUpCiProb2,dataProb2,_ = readStatistics(algorithmsLabels,algDirPrefixes1_1,numRobotsValues,suffix_file_list,datalines,nSamples,algorithmAlternativeDir,prefixNumRobots,prefixNumFollowingRobots,numPercentValues,"new adhoc experiments/") 
+  dataMean0_1,dataUpCi0_1,data0_1,_ = readStatistics(algorithmsLabels,algDirPrefixes1_1,numRobotsValues,suffix_file_list,datalines,nSamples,algorithmAlternativeDir,prefixNumRobots,prefixNumFollowingRobots) 
+  dataMean1_1,dataUpCi1_1,data1_1,_ = readStatistics(algorithmsLabels2,algDirPrefixes2_1,numRobotsValues,suffix_file_list,datalines,nSamples,algorithmAlternativeDir,prefixNumRobots,prefixNumFollowingRobots) 
+  
+  for i_sf in range(len(suffix_file_list)):
+    for a in range(len(algorithmsLabels)):
+        sumData0_1 = [sum(dataMean0_1[:,0,a,i_sf,option])]*len(numPercentValues)
+        sumUpCi0_1 = [sum(dataUpCi0_1[:,0,a,i_sf,option])]*len(numPercentValues)
+        sumData1_1 = [sum(dataMean1_1[:,0,a,i_sf,option])]*len(numPercentValues)
+        sumUpCi1_1 = [sum(dataUpCi1_1[:,0,a,i_sf,option])]*len(numPercentValues)
+        sumMeanProb2 = [sum(dataMeanProb2[:,m,a,i_sf,option]) for m in range(len(numPercentValues))]
+        sumUpCiProb2 = [sum(dataUpCiProb2[:,m,a,i_sf,option]) for m in range(len(numPercentValues))]
+        
+        plt.errorbar(numPercentValues,sumData0_1, yerr=[m1 - n1 for m1,n1 in zip(sumUpCi0_1,sumData0_1)], label=algorithmsLabels[a],marker=algorithmsSymbol[a],capsize=5);
+        plt.errorbar(numPercentValues,sumData1_1, yerr=[m1 - n1 for m1,n1 in zip(sumUpCi1_1,sumData1_1)], label=algorithmsLabels2[a],marker=algorithmsSymbol[a+len(algorithmsLabels)],capsize=5);
+        plt.errorbar(numPercentValues,sumMeanProb2, yerr=[m1 - n1 for m1,n1 in zip(sumUpCiProb2,sumMeanProb2)], label="Ad hoc",marker=algorithmsSymbol[a],capsize=5);
+        
+        plt.legend()
+        plt.xlabel("Percentage");
+        plt.ylabel("Sum of total time (s)")
+        filebasename = prefixImgFile+"Sum"+"_"+str(option)+algorithmsLabels[a]+suffix_file_list[i_sf]
+        print(filebasename+".pdf generated")
+        plt.savefig(filebasename+".pdf",bbox_inches="tight",pad_inches=0.001);
+        # ~ plt.show();
+        plt.clf()
+
 def plotAllAlternatives(option):
   '''Plot a comparison between the alternative algorithms.'''
   '''
@@ -360,7 +430,8 @@ def comparingSameAlternatives(option):
       plt.clf()
 
 # ~ mainLoop(10)
-plotAllAlternatives(10)
+sumOverRobots(10)
+# ~ plotAllAlternatives(10)
 # ~ comparingSameAlternatives(10)
 # ~ mainLoop(19)
 
