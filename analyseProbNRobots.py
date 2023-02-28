@@ -243,10 +243,10 @@ def mainLoop(option,doFitting = False):
 def sumOverRobots(option):
   
   # Test for NoCoord as alternative and SQF or TRVF by the knowing robots.
-  algorithmAlternativeDir=["NoCoordAlt/","NoCoordAlt/"]
-  algorithmsLabels = ["SQF","TRVF"];
-  algorithmsLabels2 = ["No c.","No c."]
-  prefixImgFile = "NoCoordalt"
+  # ~ algorithmAlternativeDir=["NoCoordAlt/","NoCoordAlt/"]
+  # ~ algorithmsLabels = ["SQF","TRVF"];
+  # ~ algorithmsLabels2 = ["No c.","No c."]
+  # ~ prefixImgFile = "NoCoordalt"
   
   
   # ~ # Same as above, but one element per array.
@@ -262,10 +262,10 @@ def sumOverRobots(option):
   # ~ prefixImgFile = "TRVFaltSQFknowing"
   
   # ~ # Test for SQF as alternative and TRVF by the knowing robots.
-  # ~ algorithmAlternativeDir=["SQFAlt/","SQFAlt/"]
-  # ~ algorithmsLabels = ["TRVF"];
-  # ~ algorithmsLabels2 = ["SQF","No c."]
-  # ~ prefixImgFile = "SQFaltTRVFknowing"
+  algorithmAlternativeDir=["SQFAlt/","SQFAlt/"]
+  algorithmsLabels = ["TRVF"];
+  algorithmsLabels2 = ["SQF","No c."]
+  prefixImgFile = "SQFaltTRVFknowing"
   
   suffix_file_list = ['nonholo','holo']
   
@@ -306,9 +306,54 @@ def sumOverRobots(option):
         plt.ylabel("Sum of total time (s)")
         filebasename = prefixImgFile+"Sum"+"_"+str(option)+algorithmsLabels[a]+suffix_file_list[i_sf]
         print(filebasename+".pdf generated")
-        plt.savefig(filebasename+".pdf",bbox_inches="tight",pad_inches=0.001);
-        # ~ plt.show();
+        # ~ plt.savefig(filebasename+".pdf",bbox_inches="tight",pad_inches=0.001);
+        plt.show();
         plt.clf()
+
+def sumOverRobotsForDifferentAltAlg(option):
+  # Test for TRVF as alternative and SQF by the knowing robots.
+  # ~ algorithmAlternativeDir=["NoCoordAlt/","TRVFAlt/"]
+  # ~ algorithmsLabels = ["SQF","SQF"];
+  # ~ prefixImgFile = "SumTRVFaltNoCoordAltSQFknowing"
+  
+  # Test for SQF as alternative and TRVF by the knowing robots.
+  algorithmAlternativeDir=["NoCoordAlt/","SQFAlt/"]
+  algorithmsLabels = ["TRVF","TRVF"];
+  prefixImgFile = "SumSQFaltNoCoordAltTRVFknowing"
+  
+  suffix_file_list = ['nonholo','holo']
+  
+  algDirPrefixes1_1 = dictHoloNonHolo(algorithmsLabels,algorithmDirectoriesHolo2,algorithmDirectoriesNonHolo2)
+
+  prefixNumRobots = "robots_"
+  prefixNumFollowingRobots = "m_"
+  
+  algorithmsSymbol = ["."]*len(algorithmsLabels);
+  numPercentValues = range(10, 91, 10)
+  numRobotsValues = range(20, 301, 20)
+  nSamples = 40
+
+  datalines = 19+1
+  
+  dataMeanProb2,dataUpCiProb2,dataProb2,_ = readStatistics(algorithmsLabels,algDirPrefixes1_1,numRobotsValues,suffix_file_list,datalines,nSamples,algorithmAlternativeDir,prefixNumRobots,prefixNumFollowingRobots,numPercentValues,"new adhoc experiments/") 
+  
+  for i_sf in range(len(suffix_file_list)):
+    for a in range(len(algorithmsLabels)):
+      sumMeanProb2 = [sum(dataMeanProb2[:,m,a,i_sf,option]) for m in range(len(numPercentValues))]
+      sumUpCiProb2 = [sum(dataUpCiProb2[:,m,a,i_sf,option]) for m in range(len(numPercentValues))]
+      
+      tmpAlg = algorithmAlternativeDir[a].replace("Alt/","")
+      if tmpAlg == "NoCoord": tmpAlg = "No c." 
+      plt.errorbar(numPercentValues,sumMeanProb2, yerr=[m1 - n1 for m1,n1 in zip(sumUpCiProb2,sumMeanProb2)], label="Alg="+tmpAlg,marker=algorithmsSymbol[a],capsize=5);
+      
+    plt.legend()
+    plt.xlabel("Percentage");
+    plt.ylabel("Sum of total time (s)")
+    filebasename = prefixImgFile+"_"+str(option)+algorithmsLabels[a]+suffix_file_list[i_sf]
+    print(filebasename+".pdf generated")
+    plt.savefig(filebasename+".pdf",bbox_inches="tight",pad_inches=0.001);
+    # ~ plt.show();
+    plt.clf()
 
 def plotAllAlternatives(option):
   '''Plot a comparison between the alternative algorithms.'''
@@ -430,7 +475,8 @@ def comparingSameAlternatives(option):
       plt.clf()
 
 # ~ mainLoop(10)
-sumOverRobots(10)
+# ~ sumOverRobots(10)
+sumOverRobotsForDifferentAltAlg(10)
 # ~ plotAllAlternatives(10)
 # ~ comparingSameAlternatives(10)
 # ~ mainLoop(19)
