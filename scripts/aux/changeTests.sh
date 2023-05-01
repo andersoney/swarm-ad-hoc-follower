@@ -32,3 +32,17 @@ for hol in holo nonholo; do
     done
   done
 done
+
+for hol in holo nonholo; do
+  for suf in m1 angle; do
+    for alg in TRVF SQF; do
+      sed 's/nTests=[0-9]*/nTests='$NUMCHANGE'/' NoCoordAlt/$hol/conf$alg\_$suf.sh > tmp_file
+      mv tmp_file NoCoordAlt/$hol/conf$alg\_$suf.sh
+    done
+  done
+  for alg in NoCoord OnlyAdhoc; do
+    sed 's/nTests=[0-9]*/nTests='$NUMCHANGE'/' NoCoordAlt/$hol/conf$alg.sh > tmp_file
+    mv tmp_file NoCoordAlt/$hol/conf$alg.sh
+  done
+done
+

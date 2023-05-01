@@ -1,8 +1,8 @@
 nTests=40
 varsExp=( neighbourhoodAngle )
-minExp=( 15 )     
+minExp=( 0 )     
 maxExp=( 90 )  
-increment=( 15 )
+increment=( 7,5 )
 folderConf="nonholo/NoCoordAlt/SQF/robots_100/m_50/"
 defaultVarNames=(s v K n   m d D  holo algorithm neighbourhoodAngle  alternativeAlgorithm)
-defaultValues=(  3 1 5 50 50 3 13 0    SQF       90                 NoCoord)
+defaultValues=(  3 1 5 50 50 3 13 0    SQF       0                 NoCoord)

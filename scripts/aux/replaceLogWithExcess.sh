@@ -2,7 +2,7 @@
 
 if [ $# -ne 1 ]; then
   echo "Usage:"
-  echo "  script rootDir"
+  echo "  $0 rootDir"
   exit
 fi
 

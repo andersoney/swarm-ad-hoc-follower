@@ -2,7 +2,7 @@
 
 if [ $# -ne 1 ]; then
   echo "Usage:"
-  echo "  script fileList"
+  echo "  $0 fileList"
   echo "    fileList: list of files of outliers to delete"
   exit
 fi

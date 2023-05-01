@@ -1,5 +1,6 @@
 import sys
 import numpy as np
+import matplotlib
 import matplotlib.pyplot as plt
 import math
 import os
@@ -21,12 +22,12 @@ def calcConfInt(mean,var,size):
   uppervalue = mean + t_variate * unbiased_sd/math.sqrt(size)
   return uppervalue
 
-h = "holo"
-al = "SQF"
-# ~ S = [3,5,7]
-S = [3]
+# ~ h = "holo"
+h = "nonholo"
+al = "NoCoord"
+S = [3,5,7]
+# ~ S = [3]
 D = 13
-Ndist = 2 #number of post-targets
 
 algorithmDirectories = {"holo":{}, "nonholo":{}}
 prefixNum = {"holo":{}, "nonholo":{}}
@@ -35,51 +36,35 @@ for h1 in ["holo","nonholo"]:
   for alg1 in ["NoCoord","SQF","TRVF"]:
     algorithmDirectories[h1][alg1] = []
     prefixNum[h1][alg1] = []
-    algorithmsLabels[h1][alg1] = []
-
-
-algorithmDirectories["holo"]["NoCoord"] += ['./holo/NoCoord/s3/']
-prefixNum["holo"]["NoCoord"] += ['n_']
-algorithmsLabels["holo"]["NoCoord"] += ['No coord.'];
-
-
-algorithmDirectories["nonholo"]["NoCoord"] += ['./nonholo/NoCoord/s3/']
-prefixNum["nonholo"]["NoCoord"] += ['n_']
-algorithmsLabels["nonholo"]["NoCoord"] += ['No coord.'];
-
-algorithmDirectories["nonholo"]["SQF"] += ['nonholo/SQF/s3/']
-prefixNum["nonholo"]["SQF"] += ['n_']
-algorithmsLabels["nonholo"]["SQF"] += ['SQF']
-
-
-algorithmDirectories["holo"]["SQF"] += ['holo/SQF/s3/']
-prefixNum["holo"]["SQF"] += ['n_']
-algorithmsLabels["holo"]["SQF"] += ['SQF']
+    algorithmsLabels[h1][alg1] = [] 
 
 for s in S:
-  algorithmDirectories["holo"]["TRVF"] += ['holo/TRVF/s'+str(s)+'/']
+  algorithmDirectories["holo"]["NoCoord"] += ['neighbourAngle zero experiments/holo/NoCoord/s'+str(s)+'/']
+  prefixNum["holo"]["NoCoord"] += ['n_']
+  algorithmsLabels["holo"]["NoCoord"] += ['No c.'];
+  
+  algorithmDirectories["nonholo"]["NoCoord"] += ['neighbourAngle zero experiments/nonholo/NoCoord/s'+str(s)+'/']
+  prefixNum["nonholo"]["NoCoord"] += ['n_']
+  algorithmsLabels["nonholo"]["NoCoord"] += ['No c.'];
+  
+  
+  algorithmDirectories["holo"]["TRVF"] += ['original root/holo/TRVF/s'+str(s)+'/']
   prefixNum["holo"]["TRVF"] += ['n_']
   algorithmsLabels["holo"]["TRVF"] += ['TRVF']
-  algorithmDirectories["holo"]["TRVF"] += ['new adhoc experiments/delme_when_complete/holo/TRVF/s'+str(s)+'/']
-  prefixNum["holo"]["TRVF"] += ['n_']
-  algorithmsLabels["holo"]["TRVF"] += ['TRVF new']
   
-  
-
-# ~ algorithmDirectories["holo"]["TRVF"] += ['../cool path vector field/holo/K_5/']
-# ~ prefixNum["holo"]["TRVF"] += ['n_']
-# ~ algorithmsLabels["holo"]["TRVF"] += ['TRVFold']
-
-for s in S:
-  algorithmDirectories["nonholo"]["TRVF"] += ['nonholo/TRVF/s'+str(s)+'/']
+  algorithmDirectories["nonholo"]["TRVF"] += ['original root/nonholo/TRVF/s'+str(s)+'/']
   prefixNum["nonholo"]["TRVF"] += ['n_']
   algorithmsLabels["nonholo"]["TRVF"] += ['TRVF']
-  algorithmDirectories["nonholo"]["TRVF"] += ['new adhoc experiments/delme_when_complete/nonholo/TRVF/s'+str(s)+'/']
-  prefixNum["nonholo"]["TRVF"] += ['n_']
-  algorithmsLabels["nonholo"]["TRVF"] += ['TRVF new']
+  
+  algorithmDirectories["nonholo"]["SQF"] += ['neighbourAngle zero experiments/nonholo/SQF/s'+str(s)+'/']
+  prefixNum["nonholo"]["SQF"] += ['n_']
+  algorithmsLabels["nonholo"]["SQF"] += ['SQF']
+  
+  algorithmDirectories["holo"]["SQF"] += ['neighbourAngle zero experiments/holo/SQF/s'+str(s)+'/']
+  prefixNum["holo"]["SQF"] += ['n_']
+  algorithmsLabels["holo"]["SQF"] += ['SQF']
 
 printValuesForTTest = False # Set true if one wishes to print values for t-test.
-
 
 def initData(algorithmLabelsList, algorithmDirectoriesList, prefixNumList):
   algorithmsSymbol = ["."]*len(algorithmLabelsList);
@@ -143,17 +128,19 @@ list_line_ylabel = [
   "Number of samples for velocity",                  # 18
   "Throughput (1/s)"                                 # 19
 ]
-
+  
     
 def selectPlotEstimation(varValues, dataMean, a, option, s, D):
   if al == "TRVF":
     TRVF.plotEstimation(varValues, dataMean, a, option, s, D)
   elif al == "NoCoord":
-    NoCoord.plotEstimation(varValues, dataMean, a, option, s, D, Ndist)
+    NoCoord.plotEstimation(varValues, dataMean, a, option, s, D)
   elif al == "SQF":
     SQF.plotEstimation(varValues, dataMean, a, option, s, D)
 
 plt.rcParams.update({'font.size': 20})
+matplotlib.rcParams['pdf.fonttype'] = 42
+matplotlib.rcParams['ps.fonttype'] = 42
 
 def mainLoop(option, showEstimated=True):
   varValues, algorithmsSymbol, nSamples, dataMean, dataVari, dataUpCi = initData(algorithmsLabels[h][al], algorithmDirectories[h][al], prefixNum[h][al])
@@ -163,12 +150,9 @@ def mainLoop(option, showEstimated=True):
     # ~ plt.errorbar(varValues,dataMean[:,a,option], yerr=[m - n for m,n in zip(dataUpCi[:,a,option],dataMean[:,a,option])], label="Experiments",marker=algorithmsSymbol[a],capsize=5);
     plt.errorbar(varValues,dataMean[:,a,option], yerr=[m - n for m,n in zip(dataUpCi[:,a,option],dataMean[:,a,option])], label=algorithmsLabels[h][al][a],marker=algorithmsSymbol[a],capsize=5);
     
-    print(h,al,list_line_ylabel[option],algorithmsLabels[h][al][a])
-    print(dataMean[:,a,option])
-    
     holoSubStr = "nonholo" if "nonholo" in algorithmDirectories[h][al][a] else "holo"
     if showEstimated:
-      print(holoSubStr,end=" ")
+      print(h,al,list_line_ylabel[option],algorithmsLabels[h][al][a],S[a])
       selectPlotEstimation(varValues, dataMean, a, option, S[a], D)
     
     if printValuesForTTest:
@@ -181,9 +165,9 @@ def mainLoop(option, showEstimated=True):
     plt.legend()
     plt.xlabel("Number of robots");
     plt.ylabel(list_line_ylabel[option])
-  # ~ plt.savefig("FigureEQ"+al+str(option)+holoSubStr+".pdf",bbox_inches="tight",pad_inches=0.00);
-  plt.show()
-  plt.clf()
+    plt.savefig("FigureEQ"+al+str(option)+holoSubStr+"s"+str(S[a])+".pdf",bbox_inches="tight",pad_inches=0.00);
+    # ~ plt.show()
+    plt.clf()
 
 def mainLoopAlgorithmsTogether(algs, option):
   for h in ["holo", "nonholo"]:
@@ -216,7 +200,8 @@ def mainLoopAlgorithmsTogether(algs, option):
     # ~ plt.show()
     plt.clf()
 
-mainLoop(10,False)
+mainLoop(10)
+# ~ mainLoop(10,False)
 # ~ mainLoopAlgorithmsTogether(["NoCoord","SQF","TRVF"], 16)
 # ~ mainLoopAlgorithmsTogether(["NoCoord","SQF","TRVF"], 13)
 

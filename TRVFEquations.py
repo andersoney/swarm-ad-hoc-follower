@@ -1,6 +1,10 @@
 import numpy as np
 import math
 import matplotlib.pyplot as plt
+import sys
+
+sys.path.insert(0, '.')
+from util import NRMSE
 
 
 class TRVF(object):
@@ -12,25 +16,24 @@ class TRVF(object):
   
   r = staticmethod(lambda s:  (s*math.sin(TRVF.alpha/2) - TRVF.d/2)/(1 - math.sin(TRVF.alpha/2)))
   
-  d_r = staticmethod(lambda s: math.sqrt(s*(2*TRVF.r(s) + s) - TRVF.r(s)*TRVF.d)) 
+  ang4 = staticmethod(lambda D: math.atan(TRVF.d/(2*D)))
+  
+  d_y = staticmethod(lambda D: D - math.sqrt(D**2 - TRVF.d**2/4))
+  
+  d_s = staticmethod(lambda s,D: D - math.sqrt(s*(2*TRVF.r(s) + s) - TRVF.d*(TRVF.r(s) + TRVF.d/4)) - TRVF.d_y(D)) 
   
   @staticmethod
   def Tstart(vmed,n,D):
-    ang = math.atan(TRVF.d/(2*D))
-    Num = n*ang/(2*math.pi)
+    Num = n*TRVF.ang4(D)/(2*math.pi)
     return TRVF.ms1/((Num+1)*vmed)
   
-  TfirstRobot = staticmethod(lambda vmed,s,D: TRVF.d_r(s)/vmed  + (TRVF.r(s))*0.5*TRVF.beta/vmed)
-  
-  @staticmethod
-  def TleavingTarget(vmed,s,D):
-    return (TRVF.d_r(s)/vmed + (TRVF.r(s))*0.5*TRVF.beta/vmed)
+  TfirstRobot = staticmethod(lambda vmed,s,D: 2*TRVF.d_s(s,D)/vmed  + (TRVF.r(s))*TRVF.beta/vmed)
   
   @staticmethod
   def f1(K,n,I,v,s,D):
     return K*n/TRVF.Kcurve
   
-  C3 = staticmethod(lambda vmed,s,I,n,D: TRVF.Tstart(vmed,n,D) + TRVF.TfirstRobot(vmed,s,D) + TRVF.TleavingTarget(vmed,s,D))
+  C3 = staticmethod(lambda vmed,s,I,n,D: TRVF.Tstart(vmed,n,D) + TRVF.TfirstRobot(vmed,s,D))
   
   @staticmethod
   def bestK(f, xs, ys, vs, Is, s, C0, D, f0, i0=2):
@@ -58,11 +61,12 @@ class TRVF(object):
   def plotEstimation(varValues, dataMean, a, option, s, D):
     Imed = 0.5*np.array(dataMean[:,a,13])
     vmed = dataMean[:,a,16]
-
     K1 = TRVF.bestK(TRVF.f1,varValues,dataMean[:,a,option],vmed,Imed,s,TRVF.C3,D,len(vmed)-1,0)
-    print("TRVF K =", K1)
     Y1 = [TRVF.C3(vmed[i],s,Imed[i],varValues[i],D) + TRVF.f1(K1,varValues[i],Imed[i],vmed[i],s,D) for i in range(len(varValues))]
+    print("TRVF K =", round(K1,4),"NRMSE=",round(NRMSE(dataMean[:,a,option],Y1),4))
+    # ~ plt.plot(varValues,Y1,label="Estimation")
     plt.plot(varValues,Y1,label="Estimation")
+  
   
   @staticmethod
   def plotAndReturnEstimation(varValues, dataMean, a, option, s, D, m, i_sf, Imed2, vmed2, plotIt=True):
@@ -75,9 +79,7 @@ class TRVF(object):
     else:
       vmed = dataMean[:,m,a,i_sf,16]
     K1 = TRVF.bestK(TRVF.f1,varValues,dataMean[:,m,a,i_sf,option],vmed,Imed,s,TRVF.C3,D,len(vmed)-1,0)
-    # ~ print("TRVF K =", K1)
     Y1 = [TRVF.C3(vmed[i],s,Imed[i],varValues[i],D) + TRVF.f1(K1,varValues[i],Imed[i],vmed[i],s,D) for i in range(len(varValues))]
     if plotIt: plt.plot(varValues,Y1,label="Estimation")
-    
     return Y1
 

@@ -1,5 +1,6 @@
 import sys
 import numpy as np
+import matplotlib
 import matplotlib.pyplot as plt
 import math
 import os
@@ -18,15 +19,15 @@ def calcConfInt(mean,var,size):
 
 '''Directories of new experiments'''
 algorithmDirectoriesNonHolo2 = {
-  "TRVF": "new adhoc experiments 0/nonholo/TRVF/s3/n_",
-  "SQF": "new adhoc experiments 0/nonholo/SQF/s3/n_",
-  "No c.": "./nonholo/NoCoord/s3/n_",
+  "TRVF": "original root/nonholo/TRVF/s3/n_",
+  "SQF": "neighbourAngle zero experiments/nonholo/SQF/s3/n_",
+  "No c.": "neighbourAngle zero experiments/nonholo/NoCoord/s3/n_",
 }
 
 algorithmDirectoriesHolo2 = {
-  "TRVF": "new adhoc experiments 0/holo/TRVF/s3/n_",
-  "SQF": "new adhoc experiments 0/holo/SQF/s3/n_",
-  "No c.": "./holo/NoCoord/s3/n_",
+  "TRVF": "original root/holo/TRVF/s3/n_",
+  "SQF": "neighbourAngle zero experiments/holo/SQF/s3/n_",
+  "No c.": "neighbourAngle zero experiments/holo/NoCoord/s3/n_",
 }
 
 
@@ -142,6 +143,9 @@ def plotAndListOutliers(prefixDir,option,suffix_file_list,i_sf,algorithmAlternat
     plt.axhline(y=timeLimit,linestyle = '--')
 
 plt.rcParams.update({'font.size': 20})
+matplotlib.rcParams['pdf.fonttype'] = 42
+matplotlib.rcParams['ps.fonttype'] = 42
+
 
 def mainLoop(option,doFitting = False):
   '''Plot the results based only on the directories given.'''
@@ -197,16 +201,16 @@ def mainLoop(option,doFitting = False):
   datalines = 19+1
   printValuesForTTest = False # Set True if one wishes to print values for t-test.
   
-  dataMeanProb2,dataUpCiProb2,dataProb2,_ = readStatistics(algorithmsLabels,algDirPrefixes1_1,numRobotsValues,suffix_file_list,datalines,nSamples,algorithmAlternativeDir,prefixNumRobots,prefixNumFollowingRobots,numPercentValues,"new adhoc experiments/") 
+  dataMeanProb2,dataUpCiProb2,dataProb2,dataVari2 = readStatistics(algorithmsLabels,algDirPrefixes1_1,numRobotsValues,suffix_file_list,datalines,nSamples,algorithmAlternativeDir,prefixNumRobots,prefixNumFollowingRobots,numPercentValues,"neighbourAngle zero experiments/") 
   dataMean0_1,dataUpCi0_1,data0_1,_ = readStatistics(algorithmsLabels,algDirPrefixes1_1,numRobotsValues,suffix_file_list,datalines,nSamples,algorithmAlternativeDir,prefixNumRobots,prefixNumFollowingRobots) 
   dataMean1_1,dataUpCi1_1,data1_1,_ = readStatistics(algorithmsLabels2,algDirPrefixes2_1,numRobotsValues,suffix_file_list,datalines,nSamples,algorithmAlternativeDir,prefixNumRobots,prefixNumFollowingRobots) 
   
-  # ~ dataMeanProb,dataUpCiProb,dataProb,_ = readStatistics(algorithmsLabels,algDirPrefixes1_1,numRobotsValues,suffix_file_list,datalines,nSamples,algorithmAlternativeDir,prefixNumRobots,prefixNumFollowingRobots,numPercentValues,"new adhoc experiments 0/") 
+  # ~ dataMeanProb,dataUpCiProb,dataProb,_ = readStatistics(algorithmsLabels,algDirPrefixes1_1,numRobotsValues,suffix_file_list,datalines,nSamples,algorithmAlternativeDir,prefixNumRobots,prefixNumFollowingRobots,numPercentValues,"neighbourAngle zero experiments/") 
   
   
   
   if printValuesForTTest:
-    print('==== '+list_line_ylabel[option]+' ====')
+    print('#==== '+list_line_ylabel[option]+' ====')
   for i_sf in range(len(suffix_file_list)):
     for a in range(len(algorithmsLabels)):
       for m in range(len(numPercentValues)):
@@ -217,9 +221,9 @@ def mainLoop(option,doFitting = False):
         
         plt.errorbar(numRobotsValues,dataMean0_1[:,0,a,i_sf,option], yerr=[m1 - n1 for m1,n1 in zip(dataUpCi0_1[:,0,a,i_sf,option],dataMean0_1[:,0,a,i_sf,option])], label=algorithmsLabels[a],marker=algorithmsSymbol[a],capsize=5);
         plt.errorbar(numRobotsValues,dataMean1_1[:,0,a,i_sf,option], yerr=[m1 - n1 for m1,n1 in zip(dataUpCi1_1[:,0,a,i_sf,option],dataMean1_1[:,0,a,i_sf,option])], label=algorithmsLabels2[a],marker=algorithmsSymbol[a+len(algorithmsLabels)],capsize=5);
-        plt.errorbar(numRobotsValues,dataMeanProb2[:,m,a,i_sf,option], yerr=[m1 - n1 for m1,n1 in zip(dataUpCiProb2[:,m,a,i_sf,option],dataMeanProb2[:,m,a,i_sf,option])], label="Ad hoc "+str(numPercentValues[m])+"%",marker=algorithmsSymbol[a],capsize=5);
+        plt.errorbar(numRobotsValues,dataMeanProb2[:,m,a,i_sf,option], yerr=[m1 - n1 for m1,n1 in zip(dataUpCiProb2[:,m,a,i_sf,option],dataMeanProb2[:,m,a,i_sf,option])], label="AHMT "+str(numPercentValues[m])+"%",marker=algorithmsSymbol[a],capsize=5);
         
-        # ~ plotAndListOutliers("new adhoc experiments/",option,suffix_file_list,i_sf,algorithmAlternativeDir,algorithmsLabels,a,prefixNumRobots,numPercentValues,m,numRobotsValues,dataProb2,prefixNumFollowingRobots,nSamples)
+        # ~ plotAndListOutliers("neighbourAngle zero experiments/",option,suffix_file_list,i_sf,algorithmAlternativeDir,algorithmsLabels,a,prefixNumRobots,numPercentValues,m,numRobotsValues,dataProb2,prefixNumFollowingRobots,nSamples)
         # ~ print('----------------')
         
         if doFitting:
@@ -228,21 +232,21 @@ def mainLoop(option,doFitting = False):
             print('#',end='')
             print(algorithmsLabels[a],suffix_file_list[i_sf],sep='-------')
             print('means'+algorithmsLabels[a]+' = ',end='')
-            print(*dataMeanProb[:,a,option], sep=', ')
+            print(*dataMeanProb2[:,a,option], sep=', ')
             print('vari'+algorithmsLabels[a]+' = ',end='')
-            print(*dataVari[:,a,option], sep=', ')
+            print(*dataVari2[:,a,option], sep=', ')
         plt.legend()
         plt.xlabel("Number of robots");
         plt.ylabel(list_line_ylabel[option])
         filebasename = prefixImgFile+"FigNoEstim"+"Perc_"+str(numPercentValues[m])+"_"+str(option)+algorithmsLabels[a]+suffix_file_list[i_sf]
         print(filebasename+".pdf generated")
-        plt.savefig(filebasename+".pdf",bbox_inches="tight",pad_inches=0.001);
+        plt.savefig(filebasename+".pdf",bbox_inches="tight",pad_inches=0.00);
         # ~ plt.show();
         plt.clf()
 
 def sumOverRobots(option):
   
-  # Test for NoCoord as alternative and SQF or TRVF by the knowing robots.
+  # ~ # Test for NoCoord as alternative and SQF or TRVF by the knowing robots.
   # ~ algorithmAlternativeDir=["NoCoordAlt/","NoCoordAlt/"]
   # ~ algorithmsLabels = ["SQF","TRVF"];
   # ~ algorithmsLabels2 = ["No c.","No c."]
@@ -261,7 +265,7 @@ def sumOverRobots(option):
   # ~ algorithmsLabels2 = ["TRVF","No c."]
   # ~ prefixImgFile = "TRVFaltSQFknowing"
   
-  # ~ # Test for SQF as alternative and TRVF by the knowing robots.
+  # Test for SQF as alternative and TRVF by the knowing robots.
   algorithmAlternativeDir=["SQFAlt/","SQFAlt/"]
   algorithmsLabels = ["TRVF"];
   algorithmsLabels2 = ["SQF","No c."]
@@ -284,7 +288,7 @@ def sumOverRobots(option):
 
   datalines = 19+1
   
-  dataMeanProb2,dataUpCiProb2,dataProb2,_ = readStatistics(algorithmsLabels,algDirPrefixes1_1,numRobotsValues,suffix_file_list,datalines,nSamples,algorithmAlternativeDir,prefixNumRobots,prefixNumFollowingRobots,numPercentValues,"new adhoc experiments/") 
+  dataMeanProb2,dataUpCiProb2,dataProb2,_ = readStatistics(algorithmsLabels,algDirPrefixes1_1,numRobotsValues,suffix_file_list,datalines,nSamples,algorithmAlternativeDir,prefixNumRobots,prefixNumFollowingRobots,numPercentValues,"neighbourAngle zero experiments/") 
   dataMean0_1,dataUpCi0_1,data0_1,_ = readStatistics(algorithmsLabels,algDirPrefixes1_1,numRobotsValues,suffix_file_list,datalines,nSamples,algorithmAlternativeDir,prefixNumRobots,prefixNumFollowingRobots) 
   dataMean1_1,dataUpCi1_1,data1_1,_ = readStatistics(algorithmsLabels2,algDirPrefixes2_1,numRobotsValues,suffix_file_list,datalines,nSamples,algorithmAlternativeDir,prefixNumRobots,prefixNumFollowingRobots) 
   
@@ -299,19 +303,19 @@ def sumOverRobots(option):
         
         plt.errorbar(numPercentValues,sumData0_1, yerr=[m1 - n1 for m1,n1 in zip(sumUpCi0_1,sumData0_1)], label=algorithmsLabels[a],marker=algorithmsSymbol[a],capsize=5);
         plt.errorbar(numPercentValues,sumData1_1, yerr=[m1 - n1 for m1,n1 in zip(sumUpCi1_1,sumData1_1)], label=algorithmsLabels2[a],marker=algorithmsSymbol[a+len(algorithmsLabels)],capsize=5);
-        plt.errorbar(numPercentValues,sumMeanProb2, yerr=[m1 - n1 for m1,n1 in zip(sumUpCiProb2,sumMeanProb2)], label="Ad hoc",marker=algorithmsSymbol[a],capsize=5);
+        plt.errorbar(numPercentValues,sumMeanProb2, yerr=[m1 - n1 for m1,n1 in zip(sumUpCiProb2,sumMeanProb2)], label="AHMT",marker=algorithmsSymbol[a],capsize=5);
         
         plt.legend()
         plt.xlabel("Percentage");
         plt.ylabel("Sum of total time (s)")
         filebasename = prefixImgFile+"Sum"+"_"+str(option)+algorithmsLabels[a]+suffix_file_list[i_sf]
         print(filebasename+".pdf generated")
-        # ~ plt.savefig(filebasename+".pdf",bbox_inches="tight",pad_inches=0.001);
-        plt.show();
+        plt.savefig(filebasename+".pdf",bbox_inches="tight",pad_inches=0.00);
+        # ~ plt.show();
         plt.clf()
 
 def sumOverRobotsForDifferentAltAlg(option):
-  # Test for TRVF as alternative and SQF by the knowing robots.
+  # ~ # Test for TRVF as alternative and SQF by the knowing robots.
   # ~ algorithmAlternativeDir=["NoCoordAlt/","TRVFAlt/"]
   # ~ algorithmsLabels = ["SQF","SQF"];
   # ~ prefixImgFile = "SumTRVFaltNoCoordAltSQFknowing"
@@ -334,10 +338,15 @@ def sumOverRobotsForDifferentAltAlg(option):
   nSamples = 40
 
   datalines = 19+1
+  printValuesForTTest = False # Set True if one wishes to print values for t-test.
   
-  dataMeanProb2,dataUpCiProb2,dataProb2,_ = readStatistics(algorithmsLabels,algDirPrefixes1_1,numRobotsValues,suffix_file_list,datalines,nSamples,algorithmAlternativeDir,prefixNumRobots,prefixNumFollowingRobots,numPercentValues,"new adhoc experiments/") 
+  dataMeanProb2,dataUpCiProb2,dataProb2,_ = readStatistics(algorithmsLabels,algDirPrefixes1_1,numRobotsValues,suffix_file_list,datalines,nSamples,algorithmAlternativeDir,prefixNumRobots,prefixNumFollowingRobots,numPercentValues,"neighbourAngle zero experiments/") 
   
+  if printValuesForTTest:
+    print('#==== '+list_line_ylabel[option]+' ====')
   for i_sf in range(len(suffix_file_list)):
+    if printValuesForTTest:
+      argsStr = ""
     for a in range(len(algorithmsLabels)):
       sumMeanProb2 = [sum(dataMeanProb2[:,m,a,i_sf,option]) for m in range(len(numPercentValues))]
       sumUpCiProb2 = [sum(dataUpCiProb2[:,m,a,i_sf,option]) for m in range(len(numPercentValues))]
@@ -345,13 +354,23 @@ def sumOverRobotsForDifferentAltAlg(option):
       tmpAlg = algorithmAlternativeDir[a].replace("Alt/","")
       if tmpAlg == "NoCoord": tmpAlg = "No c." 
       plt.errorbar(numPercentValues,sumMeanProb2, yerr=[m1 - n1 for m1,n1 in zip(sumUpCiProb2,sumMeanProb2)], label="Alg="+tmpAlg,marker=algorithmsSymbol[a],capsize=5);
-      
+      if printValuesForTTest:
+        print('#',end='')
+        print(algorithmsLabels[a],suffix_file_list[i_sf],sep='-------')
+        print('means'+str(a)+' = ',end='')
+        print(*sumMeanProb2, sep=', ')
+        print('vari'+str(a)+' = ',end='')
+        print(*sumUpCiProb2, sep=', ')
+        argsStr = argsStr + "means"+str(a)+",vari"+str(a)+","
+    if printValuesForTTest:
+      textResult =  prefixImgFile+" "+algorithmsLabels[a]+suffix_file_list[i_sf]
+      print("printResult("+argsStr+"n1,n2,\""+textResult+"\")")
     plt.legend()
     plt.xlabel("Percentage");
     plt.ylabel("Sum of total time (s)")
     filebasename = prefixImgFile+"_"+str(option)+algorithmsLabels[a]+suffix_file_list[i_sf]
     print(filebasename+".pdf generated")
-    plt.savefig(filebasename+".pdf",bbox_inches="tight",pad_inches=0.001);
+    plt.savefig(filebasename+".pdf",bbox_inches="tight",pad_inches=0.00);
     # ~ plt.show();
     plt.clf()
 
@@ -366,15 +385,15 @@ def plotAllAlternatives(option):
     "./"+suffix_file+"/"+algorithmAlternativeDir[algorithm number]+algorithmsLabels[algorithm number]+"/"+prefixNumRobots;
   '''
   
-  # ~ algorithmAlternativeDir=["NoCoordAlt/","TRVFAlt/"]
-  # ~ algorithmsLabels = ["SQF"];
-  # ~ algorithmsLabels2 = ["No c.","TRVF"]
-  # ~ prefixImgFile = "TRVFaltSQFknowing"
+  algorithmAlternativeDir=["NoCoordAlt/","TRVFAlt/"]
+  algorithmsLabels = ["SQF"];
+  algorithmsLabels2 = ["No c.","TRVF"]
+  prefixImgFile = "TRVFaltSQFknowing"
 
-  algorithmAlternativeDir=["NoCoordAlt/","SQFAlt/"]
-  algorithmsLabels = ["TRVF"];
-  algorithmsLabels2 = ["No c.","SQF"]
-  prefixImgFile = "SQFaltTRVFknowing"
+  # ~ algorithmAlternativeDir=["NoCoordAlt/","SQFAlt/"]
+  # ~ algorithmsLabels = ["TRVF"];
+  # ~ algorithmsLabels2 = ["No c.","SQF"]
+  # ~ prefixImgFile = "SQFaltTRVFknowing"
   
   suffix_file_list = ['nonholo','holo']
   algDirPrefixes = dictHoloNonHolo(algorithmsLabels,algorithmDirectoriesHolo2,algorithmDirectoriesNonHolo2)
@@ -394,20 +413,20 @@ def plotAllAlternatives(option):
   dataUpCiProb = [None]*len(algorithmAlternativeDir)
   dataVariProb = [None]*len(algorithmAlternativeDir)
   for b in range(len(algorithmAlternativeDir)):
-    dataMeanProb[b],dataUpCiProb[b],_,dataVariProb[b] = readStatistics(algorithmsLabels,algDirPrefixes,numRobotsValues,suffix_file_list,datalines,nSamples,[algorithmAlternativeDir[b]]*len(algorithmsLabels),prefixNumRobots,prefixNumFollowingRobots,numPercentValues,"new adhoc experiments/") 
+    dataMeanProb[b],dataUpCiProb[b],_,dataVariProb[b] = readStatistics(algorithmsLabels,algDirPrefixes,numRobotsValues,suffix_file_list,datalines,nSamples,[algorithmAlternativeDir[b]]*len(algorithmsLabels),prefixNumRobots,prefixNumFollowingRobots,numPercentValues,"neighbourAngle zero experiments/") 
   # ~ dataMean0,dataUpCi0,_,_ = readStatistics(algorithmsLabels,algDirPrefixes,numRobotsValues,suffix_file_list,datalines,nSamples,algorithmAlternativeDir,prefixNumRobots,prefixNumFollowingRobots) 
   # ~ dataMean1,dataUpCi1,_,_ = readStatistics(algorithmsLabels2,algDirPrefixes2,numRobotsValues,suffix_file_list,datalines,nSamples,algorithmAlternativeDir,prefixNumRobots,prefixNumFollowingRobots)
 
   if printValuesForTTest:
-    print('==== '+list_line_ylabel[option]+' ====')
+    print('#==== '+list_line_ylabel[option]+' ====')
   for a in range(len(algorithmsLabels)):
     for m in range(len(numPercentValues)):
       for i_sf in range(len(suffix_file_list)):
         for b in range(len(algorithmsLabels2)):
-          plt.errorbar(numRobotsValues,dataMeanProb[b][:,m,a,i_sf,option], yerr=[m1 - n1 for m1,n1 in zip(dataUpCiProb[b][:,m,a,i_sf,option],dataMeanProb[b][:,m,a,i_sf,option])], label="Ad hoc "+algorithmsLabels2[b],marker=algorithmsSymbol[a],capsize=5);
+          plt.errorbar(numRobotsValues,dataMeanProb[b][:,m,a,i_sf,option], yerr=[m1 - n1 for m1,n1 in zip(dataUpCiProb[b][:,m,a,i_sf,option],dataMeanProb[b][:,m,a,i_sf,option])], label="Alg="+algorithmsLabels2[b],marker=algorithmsSymbol[a],capsize=5);
         if printValuesForTTest:
           print('#',end='')
-          print(algorithmsLabels2,suffix_file_list[i_sf],sep='-------')
+          print(numPercentValues[m],algorithmsLabels2,suffix_file_list[i_sf],sep='-------')
           argsStr = ""
           for b in range(len(algorithmsLabels2)):
             algbname = "Noc" if algorithmsLabels2[b] == "No c." else algorithmsLabels2[b]
@@ -416,7 +435,7 @@ def plotAllAlternatives(option):
             print('vari'+algbname+' = ',end='')
             print(*dataVariProb[b][:,m,a,i_sf,option], sep=', ')
             argsStr = argsStr + "means"+algbname+",vari"+algbname+","
-          textResult = algorithmsLabels[a]+" knowing "+suffix_file_list[i_sf]
+          textResult = str(numPercentValues[m])+' '+algorithmsLabels[a]+" knowing "+suffix_file_list[i_sf]
           print("printResult("+argsStr+"n1,n2,\""+textResult+"\")")
         # ~ for b in range(len(algorithmsLabels2)):
           # ~ plt.errorbar(numRobotsValues,dataMean1[:,0,b,i_sf,option], yerr=[m1 - n1 for m1,n1 in zip(dataUpCi1[:,0,b,i_sf,option],dataMean1[:,0,b,i_sf,option])], label=algorithmsLabels2[b],marker=algorithmsSymbol[b+len(algorithmsLabels)],capsize=5);
@@ -426,7 +445,8 @@ def plotAllAlternatives(option):
         plt.ylabel(list_line_ylabel[option])
         filebasename = prefixImgFile+"FigAllPerc"+str(numPercentValues[m])+"_"+str(option)+algorithmsLabels[a]+suffix_file_list[i_sf]
         print(filebasename+".pdf generated")
-        plt.savefig(filebasename+".pdf",bbox_inches="tight",pad_inches=0.001);
+        plt.savefig(filebasename+".pdf",bbox_inches="tight",pad_inches=0.00);
+        # ~ plt.savefig(filebasename+".png",bbox_inches="tight",pad_inches=0.00);
         # ~ plt.show();
         plt.clf()
 
@@ -457,26 +477,26 @@ def comparingSameAlternatives(option):
   dataMeanProb = [None]*len(algorithmAlternativeDir)
   dataUpCiProb = [None]*len(algorithmAlternativeDir)
   for b in range(len(algorithmAlternativeDir)):
-    dataMeanProb[b],dataUpCiProb[b],_,_ = readStatistics(algorithmsLabels,algDirPrefixes,numRobotsValues,suffix_file_list,datalines,nSamples,[algorithmAlternativeDir[b]]*len(algorithmsLabels),prefixNumRobots,prefixNumFollowingRobots,numPercentValues,"new adhoc experiments/") 
+    dataMeanProb[b],dataUpCiProb[b],_,_ = readStatistics(algorithmsLabels,algDirPrefixes,numRobotsValues,suffix_file_list,datalines,nSamples,[algorithmAlternativeDir[b]]*len(algorithmsLabels),prefixNumRobots,prefixNumFollowingRobots,numPercentValues,"neighbourAngle zero experiments/") 
   
 
   for a in range(len(algorithmsLabels)):
     for m in range(len(numPercentValues)):
       for i_sf in range(len(suffix_file_list)):
         for b in range(len(algorithmsLabels2)):
-          if b == 1: plt.errorbar(numRobotsValues,dataMeanProb[b][:,m,a,i_sf,option], yerr=[m1 - n1 for m1,n1 in zip(dataUpCiProb[b][:,m,a,i_sf,option],dataMeanProb[b][:,m,a,i_sf,option])], label="Ad hoc "+algorithmsLabels2[b]+" "+str(numPercentValues[m])+"%"+" "+suffix_file_list[i_sf],marker=algorithmsSymbol[a],capsize=5);
+          if b == 1: plt.errorbar(numRobotsValues,dataMeanProb[b][:,m,a,i_sf,option], yerr=[m1 - n1 for m1,n1 in zip(dataUpCiProb[b][:,m,a,i_sf,option],dataMeanProb[b][:,m,a,i_sf,option])], label="AHF "+algorithmsLabels2[b]+" "+str(numPercentValues[m])+"%"+" "+suffix_file_list[i_sf],marker=algorithmsSymbol[a],capsize=5);
         plt.legend()
         plt.xlabel("Number of robots");
         plt.ylabel(list_line_ylabel[option])
       filebasename = prefixImgFile+"FigAllPerc"+str(numPercentValues[m])+"_"+str(option)+algorithmsLabels[a]+suffix_file_list[i_sf]
       print(filebasename+".pdf generated")
-      # ~ plt.savefig(filebasename+".pdf",bbox_inches="tight",pad_inches=0.001);
+      # ~ plt.savefig(filebasename+".pdf",bbox_inches="tight",pad_inches=0.00);
       plt.show();
       plt.clf()
 
-# ~ mainLoop(10)
+mainLoop(10)
 # ~ sumOverRobots(10)
-sumOverRobotsForDifferentAltAlg(10)
+# ~ sumOverRobotsForDifferentAltAlg(10)
 # ~ plotAllAlternatives(10)
 # ~ comparingSameAlternatives(10)
 # ~ mainLoop(19)

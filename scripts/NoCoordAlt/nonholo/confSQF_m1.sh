@@ -5,4 +5,4 @@ maxExp=( 300 )
 increment=( 20 )
 folderConf="nonholo/NoCoordAlt/SQF/m_1/"
 defaultVarNames=(s v K n m d D holo algorithm neighbourhoodAngle alternativeAlgorithm)
-defaultValues=(  3 1 5 200 1 3 13 0 SQF 90 NoCoord)
+defaultValues=(  3 1 5 200 1 3 13 0 SQF 0 NoCoord)

@@ -87,6 +87,7 @@ makeConfigFile(){
 
 
 
+
 # Peform experiments from given paramenters.
 # Argument 1: number of experiments for each variable value.
 # Argument 2: name of the variable being experimented.
@@ -116,7 +117,7 @@ doExperiments(){
   for (( i=0; i<$nTests; i++ )); 
   do
     varValue=$minValue
-    while [ `echo "$varValue $maxValue" | awk '{printf "%i", $1 <= $2}'` != 0  ];
+    while [ `echo "$varValue $maxValue" | LC_ALL=en_EN.utf-8 gawk --use-lc-numeric '{printf "%i", $1 <= $2}'` != 0  ];
     do
       logsFolder=$folderConf/$varName\_$varValue
       if [ ! -e $logsFolder/log\_$i ]; then
@@ -127,6 +128,7 @@ doExperiments(){
         if [ ! -d $logsFolder ]; then
           mkdir $logsFolder;
         fi
+        
         bash test.sh $folderConf/$configFile  &>> $experimentsLog
         
         # check if another script saved on this current log file number while this experiment was running
@@ -148,7 +150,7 @@ doExperiments(){
           done;
         fi;
       fi;
-      varValue=`echo "$varValue $varInc" | awk '{printf "%.3f", $1 + $2}'`
+      varValue=`echo "$varValue $varInc" | LC_ALL=en_EN.utf-8 gawk --use-lc-numeric '{printf "%g", $1 + $2;}'`
     done
   done
 }
@@ -159,7 +161,7 @@ cat /dev/null > $experimentsLog
 sizeVars=${#varsExp[@]}
 for (( j=0; j<$sizeVars; j++ )); do
   if [ ! -z $samples ]; then
-    varInc=`echo "${maxExp[$i]} ${minExp[$i]} ${samples[$i]}" | awk '{printf "%.3f", ($1-$2)/($3 - 1) }'`
+    varInc=`echo "${maxExp[$i]} ${minExp[$i]} ${samples[$i]}" | LC_ALL=en_EN.utf-8 gawk --use-lc-numeric '{printf "%g", ($1-$2)/($3 - 1) }'`
   else
     varInc=${increment[$j]}
   fi

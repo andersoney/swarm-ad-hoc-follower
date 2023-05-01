@@ -90,6 +90,8 @@ def testTEqual(means1, variances1, n1, means2, variances2, n2):
 def mainLoop(fileline):
   # ~ plt.figure(figsize=(7.5,4.5));
   plt.rcParams.update({'font.size': 15})
+  matplotlib.rcParams['pdf.fonttype'] = 42
+  matplotlib.rcParams['ps.fonttype'] = 42
 
 
   for a in range(len(algorithms)):
