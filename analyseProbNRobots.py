@@ -21,13 +21,13 @@ def calcConfInt(mean,var,size):
 algorithmDirectoriesNonHolo2 = {
   "TRVF": "original root/nonholo/TRVF/s3/n_",
   "SQF": "neighbourAngle zero experiments/nonholo/SQF/s3/n_",
-  "No c.": "neighbourAngle zero experiments/nonholo/NoCoord/s3/n_",
+  "NC": "neighbourAngle zero experiments/nonholo/NoCoord/s3/n_",
 }
 
 algorithmDirectoriesHolo2 = {
   "TRVF": "original root/holo/TRVF/s3/n_",
   "SQF": "neighbourAngle zero experiments/holo/SQF/s3/n_",
-  "No c.": "neighbourAngle zero experiments/holo/NoCoord/s3/n_",
+  "NC": "neighbourAngle zero experiments/holo/NoCoord/s3/n_",
 }
 
 
@@ -161,26 +161,25 @@ def mainLoop(option,doFitting = False):
   # Test for NoCoord as alternative and SQF or TRVF by the knowing robots.
   algorithmAlternativeDir=["NoCoordAlt/","NoCoordAlt/"]
   algorithmsLabels = ["SQF","TRVF"];
-  algorithmsLabels2 = ["No c.","No c."]
+  algorithmsLabels2 = ["NC","NC"]
   prefixImgFile = "NoCoordalt"
-  
   
   # ~ # Same as above, but one element per array.
   # ~ algorithmAlternativeDir=["NoCoordAlt/"]
   # ~ algorithmsLabels = ["SQF"];
   # ~ algorithmsLabels = ["TRVF"];
-  # ~ algorithmsLabels2 = ["No c."]
+  # ~ algorithmsLabels2 = ["NC"]
   
   # ~ # Test for TRVF as alternative and SQF by the knowing robots.
   # ~ algorithmAlternativeDir=["TRVFAlt/","TRVFAlt/"]
   # ~ algorithmsLabels = ["SQF"];
-  # ~ algorithmsLabels2 = ["TRVF","No c."]
+  # ~ algorithmsLabels2 = ["TRVF","NC"]
   # ~ prefixImgFile = "TRVFaltSQFknowing"
   
   # ~ # Test for SQF as alternative and TRVF by the knowing robots.
   # ~ algorithmAlternativeDir=["SQFAlt/","SQFAlt/"]
   # ~ algorithmsLabels = ["TRVF"];
-  # ~ algorithmsLabels2 = ["SQF","No c."]
+  # ~ algorithmsLabels2 = ["SQF","NC"]
   # ~ prefixImgFile = "SQFaltTRVFknowing"
   
   suffix_file_list = ['nonholo','holo']
@@ -246,30 +245,30 @@ def mainLoop(option,doFitting = False):
 
 def sumOverRobots(option):
   
-  # ~ # Test for NoCoord as alternative and SQF or TRVF by the knowing robots.
-  # ~ algorithmAlternativeDir=["NoCoordAlt/","NoCoordAlt/"]
-  # ~ algorithmsLabels = ["SQF","TRVF"];
-  # ~ algorithmsLabels2 = ["No c.","No c."]
-  # ~ prefixImgFile = "NoCoordalt"
+  # Test for NoCoord as alternative and SQF or TRVF by the knowing robots.
+  algorithmAlternativeDir=["NoCoordAlt/","NoCoordAlt/"]
+  algorithmsLabels = ["SQF","TRVF"];
+  algorithmsLabels2 = ["NC","NC"]
+  prefixImgFile = "NoCoordalt"
   
   
   # ~ # Same as above, but one element per array.
   # ~ algorithmAlternativeDir=["NoCoordAlt/"]
   # ~ algorithmsLabels = ["SQF"];
   # ~ algorithmsLabels = ["TRVF"];
-  # ~ algorithmsLabels2 = ["No c."]
+  # ~ algorithmsLabels2 = ["NC"]
   
   # ~ # Test for TRVF as alternative and SQF by the knowing robots.
   # ~ algorithmAlternativeDir=["TRVFAlt/","TRVFAlt/"]
   # ~ algorithmsLabels = ["SQF"];
-  # ~ algorithmsLabels2 = ["TRVF","No c."]
+  # ~ algorithmsLabels2 = ["TRVF","NC"]
   # ~ prefixImgFile = "TRVFaltSQFknowing"
   
-  # Test for SQF as alternative and TRVF by the knowing robots.
-  algorithmAlternativeDir=["SQFAlt/","SQFAlt/"]
-  algorithmsLabels = ["TRVF"];
-  algorithmsLabels2 = ["SQF","No c."]
-  prefixImgFile = "SQFaltTRVFknowing"
+  # ~ # Test for SQF as alternative and TRVF by the knowing robots.
+  # ~ algorithmAlternativeDir=["SQFAlt/","SQFAlt/"]
+  # ~ algorithmsLabels = ["TRVF"];
+  # ~ algorithmsLabels2 = ["SQF","NC"]
+  # ~ prefixImgFile = "SQFaltTRVFknowing"
   
   suffix_file_list = ['nonholo','holo']
   
@@ -352,7 +351,7 @@ def sumOverRobotsForDifferentAltAlg(option):
       sumUpCiProb2 = [sum(dataUpCiProb2[:,m,a,i_sf,option]) for m in range(len(numPercentValues))]
       
       tmpAlg = algorithmAlternativeDir[a].replace("Alt/","")
-      if tmpAlg == "NoCoord": tmpAlg = "No c." 
+      if tmpAlg == "NoCoord": tmpAlg = "NC" 
       plt.errorbar(numPercentValues,sumMeanProb2, yerr=[m1 - n1 for m1,n1 in zip(sumUpCiProb2,sumMeanProb2)], label="Alg="+tmpAlg,marker=algorithmsSymbol[a],capsize=5);
       if printValuesForTTest:
         print('#',end='')
@@ -385,15 +384,15 @@ def plotAllAlternatives(option):
     "./"+suffix_file+"/"+algorithmAlternativeDir[algorithm number]+algorithmsLabels[algorithm number]+"/"+prefixNumRobots;
   '''
   
-  algorithmAlternativeDir=["NoCoordAlt/","TRVFAlt/"]
-  algorithmsLabels = ["SQF"];
-  algorithmsLabels2 = ["No c.","TRVF"]
-  prefixImgFile = "TRVFaltSQFknowing"
+  # ~ algorithmAlternativeDir=["NoCoordAlt/","TRVFAlt/"]
+  # ~ algorithmsLabels = ["SQF"];
+  # ~ algorithmsLabels2 = ["NC","TRVF"]
+  # ~ prefixImgFile = "TRVFaltSQFknowing"
 
-  # ~ algorithmAlternativeDir=["NoCoordAlt/","SQFAlt/"]
-  # ~ algorithmsLabels = ["TRVF"];
-  # ~ algorithmsLabels2 = ["No c.","SQF"]
-  # ~ prefixImgFile = "SQFaltTRVFknowing"
+  algorithmAlternativeDir=["NoCoordAlt/","SQFAlt/"]
+  algorithmsLabels = ["TRVF"];
+  algorithmsLabels2 = ["NC","SQF"]
+  prefixImgFile = "SQFaltTRVFknowing"
   
   suffix_file_list = ['nonholo','holo']
   algDirPrefixes = dictHoloNonHolo(algorithmsLabels,algorithmDirectoriesHolo2,algorithmDirectoriesNonHolo2)
@@ -429,7 +428,7 @@ def plotAllAlternatives(option):
           print(numPercentValues[m],algorithmsLabels2,suffix_file_list[i_sf],sep='-------')
           argsStr = ""
           for b in range(len(algorithmsLabels2)):
-            algbname = "Noc" if algorithmsLabels2[b] == "No c." else algorithmsLabels2[b]
+            algbname = "Noc" if algorithmsLabels2[b] == "NC" else algorithmsLabels2[b]
             print('means'+algbname+' = ',end='')
             print(*dataMeanProb[b][:,m,a,i_sf,option], sep=', ')
             print('vari'+algbname+' = ',end='')
@@ -452,15 +451,15 @@ def plotAllAlternatives(option):
 
 def comparingSameAlternatives(option):
   
-  # ~ algorithmAlternativeDir=["NoCoordAlt/","TRVFAlt/"]
-  # ~ algorithmsLabels = ["SQF"];
-  # ~ algorithmsLabels2 = ["No c.","TRVF"]
-  # ~ prefixImgFile = "TRVFaltSQFknowing"
+  algorithmAlternativeDir=["NoCoordAlt/","TRVFAlt/"]
+  algorithmsLabels = ["SQF"];
+  algorithmsLabels2 = ["NC","TRVF"]
+  prefixImgFile = "TRVFaltSQFknowing"
 
-  algorithmAlternativeDir=["NoCoordAlt/","SQFAlt/"]
-  algorithmsLabels = ["TRVF"];
-  algorithmsLabels2 = ["No c.","SQF"]
-  prefixImgFile = "SQFaltTRVFknowing"
+  # ~ algorithmAlternativeDir=["NoCoordAlt/","SQFAlt/"]
+  # ~ algorithmsLabels = ["TRVF"];
+  # ~ algorithmsLabels2 = ["NC","SQF"]
+  # ~ prefixImgFile = "SQFaltTRVFknowing"
   
   suffix_file_list = ['nonholo','holo']
   algDirPrefixes = dictHoloNonHolo(algorithmsLabels,algorithmDirectoriesHolo2,algorithmDirectoriesNonHolo2)

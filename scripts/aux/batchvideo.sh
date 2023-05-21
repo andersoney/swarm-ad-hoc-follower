@@ -2,7 +2,7 @@
 
 ECHODEBUG=""
 
-declare -a LIST=( configVideo300NoCoords3holo configVideo300NoCoords7holo  )
+declare -a LIST=( configVideo100NoCoords7holo  )
 
 for dire in "${LIST[@]}"; do 
   $ECHODEBUG mkdir -p img/"$dire";

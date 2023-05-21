@@ -41,11 +41,11 @@ for h1 in ["holo","nonholo"]:
 for s in S:
   algorithmDirectories["holo"]["NoCoord"] += ['neighbourAngle zero experiments/holo/NoCoord/s'+str(s)+'/']
   prefixNum["holo"]["NoCoord"] += ['n_']
-  algorithmsLabels["holo"]["NoCoord"] += ['No c.'];
+  algorithmsLabels["holo"]["NoCoord"] += ['NC'];
   
   algorithmDirectories["nonholo"]["NoCoord"] += ['neighbourAngle zero experiments/nonholo/NoCoord/s'+str(s)+'/']
   prefixNum["nonholo"]["NoCoord"] += ['n_']
-  algorithmsLabels["nonholo"]["NoCoord"] += ['No c.'];
+  algorithmsLabels["nonholo"]["NoCoord"] += ['NC'];
   
   
   algorithmDirectories["holo"]["TRVF"] += ['original root/holo/TRVF/s'+str(s)+'/']
@@ -178,7 +178,7 @@ def mainLoopAlgorithmsTogether(algs, option):
       AlgsLab += algorithmsLabels[h][al1]
       AlgsDir += algorithmDirectories[h][al1]
       PrefNum += prefixNum[h][al1]
-    
+
     varValues, algorithmsSymbol, nSamples, dataMean, dataVari, dataUpCi = initData(AlgsLab, AlgsDir, PrefNum)
     if printValuesForTTest:
       print('==== '+list_line_ylabel[option]+' ====')
@@ -193,9 +193,9 @@ def mainLoopAlgorithmsTogether(algs, option):
           print(*dataMean[:,a,option], sep=', ')
           print('vari'+AlgsLab[a]+' = ',end='')
           print(*dataVari[:,a,option], sep=', ')
-      plt.legend()
-      plt.xlabel("Number of robots");
-      plt.ylabel(list_line_ylabel[option])
+    plt.legend()
+    plt.xlabel("Number of robots");
+    plt.ylabel(list_line_ylabel[option])
     plt.savefig("Option"+str(option)+h+".pdf",bbox_inches="tight",pad_inches=0.00);
     # ~ plt.show()
     plt.clf()
