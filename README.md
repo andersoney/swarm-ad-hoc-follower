@@ -2,6 +2,11 @@
 
 An algorithm for congestion control of robotic swarms in common target area problem when the robots do not know the algorithm executed by the others. 
 
+## Notes
+
+The Ad Hoc Follower (AHF) is set by giving neighbourhoodAngle in config.ini different of zero. 
+
+The Ad Hoc Mixed Teams (AHMT) -- or Mixed Teams (MT) -- are set by neighbourhoodAngle = 0 in config.ini.
 
 ## Dependency
 Stage 
@@ -17,3 +22,5 @@ See test.sh.
 
 ## Running an example of experiments in batch
 See experiment.sh.
+
+

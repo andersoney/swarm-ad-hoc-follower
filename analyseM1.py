@@ -93,7 +93,7 @@ plt.rcParams.update({'font.size': 20})
 matplotlib.rcParams['pdf.fonttype'] = 42
 matplotlib.rcParams['ps.fonttype'] = 42
 
-def mainLoop(option):
+def mainLoop(option,MTName="AHMT"):
   printValuesForTTest = False # Set true if one wishes to print values for t-test.
   '''
   Results from t-test
@@ -131,7 +131,7 @@ def mainLoop(option):
   for a in range(len(algorithmsLabels)):
     for h in range(len(holoSubStr)):
       varValuesP1 = [x+1 for x in varValues]
-      plt.errorbar(varValuesP1,dataMean[:,a,h,option], yerr=[m - n for m,n in zip(dataUpCi[:,a,h,option],dataMean[:,a,h,option])], label="AHMT",marker=algorithmsSymbol[a],capsize=5);
+      plt.errorbar(varValuesP1,dataMean[:,a,h,option], yerr=[m - n for m,n in zip(dataUpCi[:,a,h,option],dataMean[:,a,h,option])], label=MTName,marker=algorithmsSymbol[a],capsize=5);
       plt.errorbar(varValuesP1,dataMeanAlg[:,a,h,option], yerr=[m - n for m,n in zip(dataUpCiAlg[:,a,h,option],dataMeanAlg[:,a,h,option])], label=algorithmsLabels[a],marker=algorithmsSymbol[a],capsize=5);
       
       # ~ plotLogs(a,h,option,nSamples,data,varValuesP1)

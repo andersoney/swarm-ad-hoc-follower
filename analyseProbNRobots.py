@@ -110,7 +110,7 @@ list_line_ylabel = [
   "Throughput (1/s)"                                 # 19
 ]
 
-def doTheFitting(a,i_sf,option,dataMean0,exponentialFit = False):
+def doTheFitting(a,i_sf,option,dataMean0,numRobotsValues,exponentialFit = False):
   maxFit = len(numRobotsValues)//2
   if exponentialFit:
     # two-degree polynomial fit
@@ -147,7 +147,7 @@ matplotlib.rcParams['pdf.fonttype'] = 42
 matplotlib.rcParams['ps.fonttype'] = 42
 
 
-def mainLoop(option,doFitting = False):
+def mainLoop(option,doFitting = False,MTName="AHMT"):
   '''Plot the results based only on the directories given.'''
   '''
   Short description of the directories:
@@ -215,18 +215,18 @@ def mainLoop(option,doFitting = False):
       for m in range(len(numPercentValues)):
         # ~ plt.errorbar(numRobotsValues,dataMeanProb[:,m,a,i_sf,option], yerr=[m1 - n1 for m1,n1 in zip(dataUpCiProb[:,m,a,i_sf,option],dataMeanProb[:,m,a,i_sf,option])], label="Ad hoc "+str(numPercentValues[m])+"% old",marker=algorithmsSymbol[a],capsize=5);
         if doFitting:
-          mymodel0values = doTheFitting(a,i_sf,option,dataMean0)
+          mymodel0values = doTheFitting(a,i_sf,option,dataMean0_1,numRobotsValues)
           plt.plot(numRobotsValues,mymodel0values,label=algorithmsLabels[a]+" reg")
         
         plt.errorbar(numRobotsValues,dataMean0_1[:,0,a,i_sf,option], yerr=[m1 - n1 for m1,n1 in zip(dataUpCi0_1[:,0,a,i_sf,option],dataMean0_1[:,0,a,i_sf,option])], label=algorithmsLabels[a],marker=algorithmsSymbol[a],capsize=5);
         plt.errorbar(numRobotsValues,dataMean1_1[:,0,a,i_sf,option], yerr=[m1 - n1 for m1,n1 in zip(dataUpCi1_1[:,0,a,i_sf,option],dataMean1_1[:,0,a,i_sf,option])], label=algorithmsLabels2[a],marker=algorithmsSymbol[a+len(algorithmsLabels)],capsize=5);
-        plt.errorbar(numRobotsValues,dataMeanProb2[:,m,a,i_sf,option], yerr=[m1 - n1 for m1,n1 in zip(dataUpCiProb2[:,m,a,i_sf,option],dataMeanProb2[:,m,a,i_sf,option])], label="AHMT "+str(numPercentValues[m])+"%",marker=algorithmsSymbol[a],capsize=5);
+        plt.errorbar(numRobotsValues,dataMeanProb2[:,m,a,i_sf,option], yerr=[m1 - n1 for m1,n1 in zip(dataUpCiProb2[:,m,a,i_sf,option],dataMeanProb2[:,m,a,i_sf,option])], label=MTName+" "+str(numPercentValues[m])+"%",marker=algorithmsSymbol[a],capsize=5);
         
         # ~ plotAndListOutliers("neighbourAngle zero experiments/",option,suffix_file_list,i_sf,algorithmAlternativeDir,algorithmsLabels,a,prefixNumRobots,numPercentValues,m,numRobotsValues,dataProb2,prefixNumFollowingRobots,nSamples)
         # ~ print('----------------')
         
         if doFitting:
-          plt.plot(numRobotsValues,((100-numPercentValues[m])/100.)*mymodel0values+(numPercentValues[m]/100.)*mymodel1values,label="possible")
+          plt.plot(numRobotsValues,((100-numPercentValues[m])/100.)*mymodel0values+(numPercentValues[m]/100.)*mymodel0values,label="possible")
         if printValuesForTTest:
             print('#',end='')
             print(algorithmsLabels[a],suffix_file_list[i_sf],sep='-------')
@@ -243,7 +243,7 @@ def mainLoop(option,doFitting = False):
         # ~ plt.show();
         plt.clf()
 
-def sumOverRobots(option):
+def sumOverRobots(option,MTName="AHMT"):
   
   # Test for NoCoord as alternative and SQF or TRVF by the knowing robots.
   algorithmAlternativeDir=["NoCoordAlt/","NoCoordAlt/"]
@@ -302,7 +302,7 @@ def sumOverRobots(option):
         
         plt.errorbar(numPercentValues,sumData0_1, yerr=[m1 - n1 for m1,n1 in zip(sumUpCi0_1,sumData0_1)], label=algorithmsLabels[a],marker=algorithmsSymbol[a],capsize=5);
         plt.errorbar(numPercentValues,sumData1_1, yerr=[m1 - n1 for m1,n1 in zip(sumUpCi1_1,sumData1_1)], label=algorithmsLabels2[a],marker=algorithmsSymbol[a+len(algorithmsLabels)],capsize=5);
-        plt.errorbar(numPercentValues,sumMeanProb2, yerr=[m1 - n1 for m1,n1 in zip(sumUpCiProb2,sumMeanProb2)], label="AHMT",marker=algorithmsSymbol[a],capsize=5);
+        plt.errorbar(numPercentValues,sumMeanProb2, yerr=[m1 - n1 for m1,n1 in zip(sumUpCiProb2,sumMeanProb2)], label=MTName,marker=algorithmsSymbol[a],capsize=5);
         
         plt.legend()
         plt.xlabel("Percentage");
@@ -493,7 +493,8 @@ def comparingSameAlternatives(option):
       plt.show();
       plt.clf()
 
-mainLoop(10)
+mainLoop(10,False,"MT")
+# ~ mainLoop(10)
 # ~ sumOverRobots(10)
 # ~ sumOverRobotsForDifferentAltAlg(10)
 # ~ plotAllAlternatives(10)

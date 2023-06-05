@@ -194,14 +194,39 @@ def bestK12List(f0,f1,y,ns,ms):
     listKs.append((K1,K2))
   return listKs
 
-def estimationsFormulaLoop(option):
+def plotConstants(option,ControlAlgConstName=r'$C_{AHA}$',NCConstName=r'$C_{AHNC}$'):
+  plt.rcParams['text.usetex'] = True
+  for i_sf in range(len(suffix_file_list)):
+    for a in range(len(algorithmsLabels)):
+      listk1k2 = bestK12List(dataMean0[:,0,a,i_sf,option],dataMean1[:,0,0,i_sf,option],dataMeanProb[:,:,a,i_sf,option],numRobotsValues,numPercentValues)
+      tmpk1 = []
+      tmpk2 = []
+      for ind in range(len(listk1k2)):
+        par = listk1k2[ind]
+        perc = numPercentValues[ind]/100.
+        tmpk1.append(par[0])
+        tmpk2.append(par[1])
+      print(algorithmsLabels[a],suffix_file_list[i_sf],tmpk1)
+      print(algorithmsLabels[a],suffix_file_list[i_sf],tmpk2)
+      plt.plot(numPercentValues,tmpk2,label=NCConstName) #NC
+      plt.plot(numPercentValues,tmpk1,label=ControlAlgConstName) #control alg.
+      plt.legend()
+      plt.xlabel("Percent");
+      plt.ylabel("Value of the constant")
+      filebasename = "ConstantsP"+str(option)+algorithmsLabels[a]+suffix_file_list[i_sf]
+      print(filebasename+".pdf generated")
+      plt.savefig(filebasename+".pdf",bbox_inches="tight",pad_inches=0.00);
+      # ~ plt.show();
+      plt.clf()
+
+def estimationsFormulaLoop(option,MTName="AHMT"):
   if printValuesForTTest:
     print('==== '+list_line_ylabel[option]+' ====')
   for i_sf in range(len(suffix_file_list)):
     for a in range(len(algorithmsLabels)):
       listk1k2 = bestK12List(dataMean0[:,0,a,i_sf,option],dataMean1[:,0,0,i_sf,option],dataMeanProb[:,:,a,i_sf,option],numRobotsValues,numPercentValues)
       for m in range(len(numPercentValues)):
-        plt.errorbar(numRobotsValues,dataMeanProb[:,m,a,i_sf,option], yerr=[m1 - n1 for m1,n1 in zip(dataUpCiProb[:,m,a,i_sf,option],dataMeanProb[:,m,a,i_sf,option])], label="AHMT "+str(numPercentValues[m])+"% Exp.",marker=algorithmsSymbol[a],capsize=5);
+        plt.errorbar(numRobotsValues,dataMeanProb[:,m,a,i_sf,option], yerr=[m1 - n1 for m1,n1 in zip(dataUpCiProb[:,m,a,i_sf,option],dataMeanProb[:,m,a,i_sf,option])], label=MTName+" "+str(numPercentValues[m])+"% Exp.",marker=algorithmsSymbol[a],capsize=5);
         algEstimation = selectPlotEstimation(algorithmsLabels[a], numRobotsValues, dataMean0, a, option, S, D, 0, i_sf)
         alternativeEstimation = selectPlotEstimation(algorithmsLabels2[0], numRobotsValues, dataMean1, 0, option, S, D, 0, i_sf)
         (k1,k2) = listk1k2[m]
@@ -222,10 +247,15 @@ def estimationsFormulaLoop(option):
         plt.ylabel(list_line_ylabel[option])
         imgDir = "plots/"+algorithmAlternativeDir+algorithmsLabels[a]+"/"+suffix_file_list[i_sf]
         filebasename = "FigureEstim"+"Perc_"+str(numPercentValues[m])+"_"+str(option)+algorithmsLabels[a]+suffix_file_list[i_sf]
-        print(filebasename+".pdf generated")
-        plt.savefig(filebasename+".pdf",bbox_inches="tight",pad_inches=0.001);
+        # ~ print(filebasename+".pdf generated")
+        plt.savefig(filebasename+".pdf",bbox_inches="tight",pad_inches=0.00);
         # ~ plt.show();
         plt.clf()
 
-estimationsFormulaLoop(10)
+# ~ estimationsFormulaLoop(10)
+# ~ plotConstants(10)
+
+estimationsFormulaLoop(10,"MT")
+plotConstants(10,r'$C_{MTB}$',r'$C_{MTNC}$')
+
 
