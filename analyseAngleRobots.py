@@ -136,7 +136,7 @@ def mainLoop(option):
         for h in range(len(holoSubStr)):
           for p in range(len(probList)):
             varValuesRad = [v*math.pi/180 for v in varValues]
-            plt.errorbar(varValuesRad,dataMean[:,a,h,nRob,p,aa,option], yerr=[m - n for m,n in zip(dataUpCi[:,a,h,nRob,p,aa,option],dataMean[:,a,h,nRob,p,aa,option])], label=algorithmsLabels[a]+" "+str(probList[p])+"%" ,marker=algorithmsSymbol[a],capsize=5,zorder=1);
+            plt.errorbar(varValuesRad,dataMean[:,a,h,nRob,p,aa,option], yerr=[m - n for m,n in zip(dataUpCi[:,a,h,nRob,p,aa,option],dataMean[:,a,h,nRob,p,aa,option])], label=str(probList[p])+"%" ,marker=algorithmsSymbol[a],capsize=5,zorder=1);
             minindex = list(dataMean[:,a,h,nRob,p,aa,option]).index(min(dataMean[:,a,h,nRob,p,aa,option]))
             if pairwiseTTest(minindex,dataMean[:,a,h,nRob,p,aa,option],dataVari[:,a,h,nRob,p,aa,option],nSamples[a]):
               plt.plot([varValuesRad[minindex]],[dataMean[minindex,a,h,nRob,p,aa,option]],color="orange",marker='s',zorder=2)
@@ -150,16 +150,17 @@ def mainLoop(option):
               print(*dataVari[:,a,h,nRob,p,aa,option], sep=', ')
               textResult = algorithmsLabels[a]+" "+holoSubStr[h]+" n="+str(numRobotsList[nRob])+" p="+str(probList[p])
               print("printResult(means"+algorithmsLabels[a]+",vari"+algorithmsLabels[a]+",n1,n2,\""+textResult+"\")")
-            # ~ plt.legend()
-            plt.xlabel("Angle (rad)");
-            plt.ylabel(list_line_ylabel[option])
-            imgLocation = "AnglesRobots"+alternativeAlgorithmsDirs[aa]+algorithmsLabels[a]+str(numRobotsList[nRob])+holoSubStr[h]+str(option)+"prob"+str(probList[p])
-            print(imgLocation + " generated.")
-            plt.savefig(imgLocation+".pdf",bbox_inches="tight",pad_inches=0.00);
-            # ~ plt.savefig(imgLocation+".png",bbox_inches="tight",pad_inches=0.00);
-            # ~ plt.show()
-            plt.clf()
-  
+          plt.legend()
+          plt.xlabel("Angle (rad)");
+          plt.ylabel(list_line_ylabel[option])
+          imgLocation = "AnglesRobots"+alternativeAlgorithmsDirs[aa]+algorithmsLabels[a]+str(numRobotsList[nRob])+holoSubStr[h]+str(option)
+          print(imgLocation + " generated.")
+          plt.savefig(imgLocation+".pdf",bbox_inches="tight",pad_inches=0.00);
+          # ~ plt.savefig(imgLocation+".png",bbox_inches="tight",pad_inches=0.00);
+          # ~ plt.show()
+          plt.clf()
+
+
 mainLoop(10)
 # ~ mainLoop(19)
 

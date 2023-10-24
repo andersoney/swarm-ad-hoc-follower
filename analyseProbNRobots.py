@@ -147,7 +147,7 @@ matplotlib.rcParams['pdf.fonttype'] = 42
 matplotlib.rcParams['ps.fonttype'] = 42
 
 
-def mainLoop(option,doFitting = False,MTName="AHMT"):
+def mainLoop(option,doFitting = False,MTName="MT"):
   '''Plot the results based only on the directories given.'''
   '''
   Short description of the directories:
@@ -243,7 +243,7 @@ def mainLoop(option,doFitting = False,MTName="AHMT"):
         # ~ plt.show();
         plt.clf()
 
-def sumOverRobots(option,MTName="AHMT"):
+def sumOverRobots(option,MTName="MT"):
   
   # Test for NoCoord as alternative and SQF or TRVF by the knowing robots.
   algorithmAlternativeDir=["NoCoordAlt/","NoCoordAlt/"]
@@ -493,9 +493,9 @@ def comparingSameAlternatives(option):
       plt.show();
       plt.clf()
 
-mainLoop(10,False,"MT")
+# ~ mainLoop(10,False,"MT")
 # ~ mainLoop(10)
-# ~ sumOverRobots(10)
+sumOverRobots(10)
 # ~ sumOverRobotsForDifferentAltAlg(10)
 # ~ plotAllAlternatives(10)
 # ~ comparingSameAlternatives(10)

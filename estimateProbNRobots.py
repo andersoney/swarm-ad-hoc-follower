@@ -194,7 +194,7 @@ def bestK12List(f0,f1,y,ns,ms):
     listKs.append((K1,K2))
   return listKs
 
-def plotConstants(option,ControlAlgConstName=r'$C_{AHA}$',NCConstName=r'$C_{AHNC}$'):
+def plotConstants(option,ControlAlgConstName=r'$C_{MTAw}$',NCConstName=r'$C_{MTNC}$'):
   plt.rcParams['text.usetex'] = True
   for i_sf in range(len(suffix_file_list)):
     for a in range(len(algorithmsLabels)):
@@ -219,7 +219,7 @@ def plotConstants(option,ControlAlgConstName=r'$C_{AHA}$',NCConstName=r'$C_{AHNC
       # ~ plt.show();
       plt.clf()
 
-def estimationsFormulaLoop(option,MTName="AHMT"):
+def estimationsFormulaLoop(option,MTName="MT"):
   if printValuesForTTest:
     print('==== '+list_line_ylabel[option]+' ====')
   for i_sf in range(len(suffix_file_list)):
@@ -256,6 +256,7 @@ def estimationsFormulaLoop(option,MTName="AHMT"):
 # ~ plotConstants(10)
 
 estimationsFormulaLoop(10,"MT")
-plotConstants(10,r'$C_{MTB}$',r'$C_{MTNC}$')
+# ~ plotConstants(10,r'$C_{MTB}$')
+plotConstants(10)
 
 

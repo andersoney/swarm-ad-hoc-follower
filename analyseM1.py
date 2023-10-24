@@ -93,7 +93,7 @@ plt.rcParams.update({'font.size': 20})
 matplotlib.rcParams['pdf.fonttype'] = 42
 matplotlib.rcParams['ps.fonttype'] = 42
 
-def mainLoop(option,MTName="AHMT"):
+def mainLoop(option,MTName="MT"):
   printValuesForTTest = False # Set true if one wishes to print values for t-test.
   '''
   Results from t-test
