@@ -196,8 +196,10 @@ def bestK12List(f0,f1,y,ns,ms):
 
 def plotConstants(option,ControlAlgConstName=r'$C_{MTAw}$',NCConstName=r'$C_{MTNC}$'):
   plt.rcParams['text.usetex'] = True
-  for i_sf in range(len(suffix_file_list)):
-    for a in range(len(algorithmsLabels)):
+  myLineStyle = ['solid']*2+['dashed']*2
+  for a in range(len(algorithmsLabels)):
+    count = 0;
+    for i_sf in range(len(suffix_file_list)):
       listk1k2 = bestK12List(dataMean0[:,0,a,i_sf,option],dataMean1[:,0,0,i_sf,option],dataMeanProb[:,:,a,i_sf,option],numRobotsValues,numPercentValues)
       tmpk1 = []
       tmpk2 = []
@@ -208,16 +210,18 @@ def plotConstants(option,ControlAlgConstName=r'$C_{MTAw}$',NCConstName=r'$C_{MTN
         tmpk2.append(par[1])
       print(algorithmsLabels[a],suffix_file_list[i_sf],tmpk1)
       print(algorithmsLabels[a],suffix_file_list[i_sf],tmpk2)
-      plt.plot(numPercentValues,tmpk2,label=NCConstName) #NC
-      plt.plot(numPercentValues,tmpk1,label=ControlAlgConstName) #control alg.
-      plt.legend()
-      plt.xlabel("Percent");
-      plt.ylabel("Value of the constant")
-      filebasename = "ConstantsP"+str(option)+algorithmsLabels[a]+suffix_file_list[i_sf]
-      print(filebasename+".pdf generated")
-      plt.savefig(filebasename+".pdf",bbox_inches="tight",pad_inches=0.00);
-      # ~ plt.show();
-      plt.clf()
+      subhnh = r'$h$' if suffix_file_list[i_sf] == "holo" else r'$nh$'
+      plt.plot(numPercentValues,tmpk2,linestyle=myLineStyle[count],label=NCConstName+' '+subhnh) #NC
+      plt.plot(numPercentValues,tmpk1,linestyle=myLineStyle[count+1],label=ControlAlgConstName+' '+subhnh) #control alg.
+      count+=2
+    plt.legend()
+    plt.xlabel("Percent");
+    plt.ylabel("Value of the constant")
+    filebasename = "ConstantsP"+str(option)+algorithmsLabels[a]
+    print(filebasename+".pdf generated")
+    plt.savefig(filebasename+".pdf",bbox_inches="tight",pad_inches=0.00);
+    # ~ plt.show();
+    plt.clf()
 
 def estimationsFormulaLoop(option,MTName="MT"):
   if printValuesForTTest:
@@ -255,7 +259,7 @@ def estimationsFormulaLoop(option,MTName="MT"):
 # ~ estimationsFormulaLoop(10)
 # ~ plotConstants(10)
 
-estimationsFormulaLoop(10,"MT")
+# ~ estimationsFormulaLoop(10,"MT")
 # ~ plotConstants(10,r'$C_{MTB}$')
 plotConstants(10)
 

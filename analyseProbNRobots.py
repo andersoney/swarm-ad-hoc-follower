@@ -495,9 +495,9 @@ def comparingSameAlternatives(option):
 
 # ~ mainLoop(10,False,"MT")
 # ~ mainLoop(10)
-sumOverRobots(10)
+# ~ sumOverRobots(10)
 # ~ sumOverRobotsForDifferentAltAlg(10)
-# ~ plotAllAlternatives(10)
+plotAllAlternatives(10)
 # ~ comparingSameAlternatives(10)
 # ~ mainLoop(19)
 

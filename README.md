@@ -2,6 +2,10 @@
 
 An algorithm for congestion control of robotic swarms in common target area problem when the robots do not know the algorithm executed by the others. 
 
+# Relationship between the files
+
+![File relations](fileRelationship.jpeg)
+
 ## Notes
 
 The Ad Hoc Follower (AHF) is set by giving neighbourhoodAngle in config.ini different of zero. 
