@@ -2,6 +2,8 @@
 
 An algorithm for congestion control of robotic swarms in common target area problem when the robots do not know the algorithm executed by the others. 
 
+More details in this [thesis](https://www.research.lancs.ac.uk/portal/services/downloadRegister/401931354/2023passosphd.pdf).
+
 # Relationship between the files
 
 ![File relations](fileRelationship.jpeg)
