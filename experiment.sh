@@ -1,14 +1,14 @@
 #!/bin/bash
-# The optional argument of this script is a file name with overrides for variables below.
-# In this script, if the vector variable samples is defined, it is used for computed the increment for each value of the variable given. Otherwise, it is used the vector increment[i] for each index of variable i.
+# The optional argument of this script is a file name with reassignments of the variables below.
+# In this script, if the vector variable samples is defined, it is used for computing the increment of each value of the given variable. Otherwise, it uses the vector increment for each variable.
 
 ### Default values ###
 # maximum number of retries if the log is empty
 RETRYTIMES=1;
 # Variables names for test.sh. Angle is measured in degrees
-defaultVarNames=(s v K n m d D holo algorithm neighbourhoodAngle alternativeAlgorithm)
+defaultVarNames=(s v K  n   m  d  D  holo algorithm neighbourhoodAngle alternativeAlgorithm)
 # default values for each variable
-defaultValues=(  3 1 5 200 50 3 13 0 SQF 90 NoCoord)
+defaultValues=(  3 1 5 200  50 3  13   0      SQF            90              NoCoord       )
 # number of repetitions for each variable value
 nTests=40
 # variables' name to do more experiments
