@@ -51,7 +51,7 @@ To run several experiments in parallel, you can shuffle the order of the variabl
 
 ~~~bash
 for i in `seq 1 10`; do 
-  echo bash scripts/NoCoordAltSQF.sh &
+  bash scripts/NoCoordAltSQF.sh &
 done
 ~~~
 
