@@ -1,0 +1,2038 @@
+# defines 'map' object used for floorplans
+include "map.inc"
+
+# defines sick laser
+include "sick.inc"
+
+# defines Pioneer-like robots
+include "pioneer.inc"
+
+# set the resolution of the underlying raytrace model in meters
+resolution 0.1
+
+speedup -1
+
+# configure the GUI window
+window
+( 
+  size [ 591.000 638.000 ] 
+  center [ 100 100 ] 
+  show_data 1
+)
+define robot pioneer2dx
+(
+  sicklaser ()
+  size [0.44 0.44 0.44]
+  localization "gps"
+  localization_origin [ 0 0 0 0 ]
+)
+
+model
+(
+  name "toDraw"
+  size [0.001 0.001 0.001]
+  pose [0 0 0 0]
+  ctrl "SQFdraw.so ./configExperiment26711.ini "
+  obstacle_return 0
+)
+
+robot
+(
+  name "robot0"
+  color "red"
+  pose [96.725406124610913 81.889193700722046 0 79.751143902540178 ]
+  ctrl "coordination.so ./configExperiment26711.ini 0 "
+)
+
+robot
+(
+  name "robot1"
+  color "red"
+  pose [94.213683593987852 120.15239491141656 0 -73.979746587574496 ]
+  ctrl "coordination.so ./configExperiment26711.ini 1 "
+)
+
+robot
+(
+  name "robot2"
+  color "red"
+  pose [81.628520280414719 95.930475180081956 0 12.490088324993829 ]
+  ctrl "coordination.so ./configExperiment26711.ini 2 "
+)
+
+robot
+(
+  name "robot3"
+  color "red"
+  pose [86.483547924780112 100.9713780213668 0 -4.1105713136494311 ]
+  ctrl "coordination.so ./configExperiment26711.ini 3 "
+)
+
+robot
+(
+  name "robot4"
+  color "red"
+  pose [81.460004232742747 93.55629225794307 0 19.165259990841154 ]
+  ctrl "coordination.so ./configExperiment26711.ini 4 "
+)
+
+robot
+(
+  name "robot5"
+  color "red"
+  pose [94.911257872258091 80.275609622869638 0 75.533581785857677 ]
+  ctrl "coordination.so ./configExperiment26711.ini 5 "
+)
+
+robot
+(
+  name "robot6"
+  color "red"
+  pose [109.54500802199179 115.30405968969205 0 -121.95142881944777 ]
+  ctrl "coordination.so ./configExperiment26711.ini 6 "
+)
+
+robot
+(
+  name "robot7"
+  color "red"
+  pose [95.935890600082217 113.88553069849681 0 -73.685951326042428 ]
+  ctrl "coordination.so ./configExperiment26711.ini 7 "
+)
+
+robot
+(
+  name "robot8"
+  color "red"
+  pose [114.82851045243653 97.772332823037686 0 171.45642215386036 ]
+  ctrl "coordination.so ./configExperiment26711.ini 8 "
+)
+
+robot
+(
+  name "robot9"
+  color "red"
+  pose [110.51577972965384 113.38570343241587 0 -128.15310124307871 ]
+  ctrl "coordination.so ./configExperiment26711.ini 9 "
+)
+
+robot
+(
+  name "robot10"
+  color "red"
+  pose [82.691796497101123 93.562879203196985 0 20.400749165564768 ]
+  ctrl "coordination.so ./configExperiment26711.ini 10 "
+)
+
+robot
+(
+  name "robot11"
+  color "red"
+  pose [87.181971089561628 96.473611462180415 0 15.382196120917778 ]
+  ctrl "coordination.so ./configExperiment26711.ini 11 "
+)
+
+robot
+(
+  name "robot12"
+  color "red"
+  pose [95.770349352755971 85.689308016335957 0 73.534492682665544 ]
+  ctrl "coordination.so ./configExperiment26711.ini 12 "
+)
+
+robot
+(
+  name "robot13"
+  color "red"
+  pose [93.317743607456265 83.81372470211501 0 67.567465268075452 ]
+  ctrl "coordination.so ./configExperiment26711.ini 13 "
+)
+
+robot
+(
+  name "robot14"
+  color "red"
+  pose [100.8718727827212 113.1700281767981 0 -93.787527568638339 ]
+  ctrl "coordination.so ./configExperiment26711.ini 14 "
+)
+
+robot
+(
+  name "robot15"
+  color "red"
+  pose [116.13644944702773 102.10946354490052 0 -172.55215113982558 ]
+  ctrl "coordination.so ./configExperiment26711.ini 15 "
+)
+
+robot
+(
+  name "robot16"
+  color "red"
+  pose [86.077003059167893 89.492351251287275 0 37.041757777333245 ]
+  ctrl "coordination.so ./configExperiment26711.ini 16 "
+)
+
+robot
+(
+  name "robot17"
+  color "red"
+  pose [86.583790428500521 111.99903638286978 0 -41.808449383825071 ]
+  ctrl "coordination.so ./configExperiment26711.ini 17 "
+)
+
+robot
+(
+  name "robot18"
+  color "red"
+  pose [86.346628614800309 95.923147212617792 0 16.625455822795622 ]
+  ctrl "coordination.so ./configExperiment26711.ini 18 "
+)
+
+robot
+(
+  name "robot19"
+  color "red"
+  pose [103.05953298795994 86.595278393956036 0 102.85711342468859 ]
+  ctrl "coordination.so ./configExperiment26711.ini 19 "
+)
+
+robot
+(
+  name "robot20"
+  color "red"
+  pose [96.827800093222308 118.3878005159041 0 -80.21187549456954 ]
+  ctrl "coordination.so ./configExperiment26711.ini 20 "
+)
+
+robot
+(
+  name "robot21"
+  color "red"
+  pose [113.14834890648213 96.340000577058873 0 164.44482319056991 ]
+  ctrl "coordination.so ./configExperiment26711.ini 21 "
+)
+
+robot
+(
+  name "robot22"
+  color "red"
+  pose [87.008630393959677 92.446538646473599 0 30.174639020115123 ]
+  ctrl "coordination.so ./configExperiment26711.ini 22 "
+)
+
+robot
+(
+  name "robot23"
+  color "red"
+  pose [112.73100925829544 94.657681394264728 0 157.23559739068148 ]
+  ctrl "coordination.so ./configExperiment26711.ini 23 "
+)
+
+robot
+(
+  name "robot24"
+  color "red"
+  pose [109.16649273740839 110.74522647113436 0 -130.4666924290359 ]
+  ctrl "coordination.so ./configExperiment26711.ini 24 "
+)
+
+robot
+(
+  name "robot25"
+  color "red"
+  pose [87.66790564292026 111.46161828577299 0 -42.904809024184964 ]
+  ctrl "coordination.so ./configExperiment26711.ini 25 "
+)
+
+robot
+(
+  name "robot26"
+  color "red"
+  pose [90.227492369323656 82.854679803035694 0 60.317679271101944 ]
+  ctrl "coordination.so ./configExperiment26711.ini 26 "
+)
+
+robot
+(
+  name "robot27"
+  color "red"
+  pose [88.680548108008978 107.61225813078266 0 -33.920576423406601 ]
+  ctrl "coordination.so ./configExperiment26711.ini 27 "
+)
+
+robot
+(
+  name "robot28"
+  color "red"
+  pose [112.51876340482515 109.70804347691322 0 -142.20715815201402 ]
+  ctrl "coordination.so ./configExperiment26711.ini 28 "
+)
+
+robot
+(
+  name "robot29"
+  color "red"
+  pose [101.6472577184561 81.912813472837087 0 95.203753709793062 ]
+  ctrl "coordination.so ./configExperiment26711.ini 29 "
+)
+
+robot
+(
+  name "robot30"
+  color "red"
+  pose [106.02402517257021 112.64361152661469 0 -115.47537798061967 ]
+  ctrl "coordination.so ./configExperiment26711.ini 30 "
+)
+
+robot
+(
+  name "robot31"
+  color "red"
+  pose [91.517628015121829 81.660434198673414 0 65.178627893328652 ]
+  ctrl "coordination.so ./configExperiment26711.ini 31 "
+)
+
+robot
+(
+  name "robot32"
+  color "red"
+  pose [80.993013840892004 96.906828961982342 0 9.2432069219648731 ]
+  ctrl "coordination.so ./configExperiment26711.ini 32 "
+)
+
+robot
+(
+  name "robot33"
+  color "red"
+  pose [107.37444942916483 111.39711793214386 0 -122.90468908846377 ]
+  ctrl "coordination.so ./configExperiment26711.ini 33 "
+)
+
+robot
+(
+  name "robot34"
+  color "red"
+  pose [103.43829748584028 81.525437779968271 0 100.54268974810836 ]
+  ctrl "coordination.so ./configExperiment26711.ini 34 "
+)
+
+robot
+(
+  name "robot35"
+  color "red"
+  pose [105.58498748651269 84.488521821993757 0 109.80167325586082 ]
+  ctrl "coordination.so ./configExperiment26711.ini 35 "
+)
+
+robot
+(
+  name "robot36"
+  color "red"
+  pose [92.963338720913043 82.471022887454922 0 68.127982243895516 ]
+  ctrl "coordination.so ./configExperiment26711.ini 36 "
+)
+
+robot
+(
+  name "robot37"
+  color "red"
+  pose [108.36476714770151 86.231136194433958 0 121.2792350538075 ]
+  ctrl "coordination.so ./configExperiment26711.ini 37 "
+)
+
+robot
+(
+  name "robot38"
+  color "red"
+  pose [82.29643584794411 96.702312128052426 0 10.551700461655836 ]
+  ctrl "coordination.so ./configExperiment26711.ini 38 "
+)
+
+robot
+(
+  name "robot39"
+  color "red"
+  pose [116.39150249469363 112.79786581389925 0 -142.01862685382369 ]
+  ctrl "coordination.so ./configExperiment26711.ini 39 "
+)
+
+robot
+(
+  name "robot40"
+  color "red"
+  pose [108.21033164352667 81.455159198421768 0 113.88034287840128 ]
+  ctrl "coordination.so ./configExperiment26711.ini 40 "
+)
+
+robot
+(
+  name "robot41"
+  color "red"
+  pose [119.14846057484975 98.825879773174819 0 176.49120541289449 ]
+  ctrl "coordination.so ./configExperiment26711.ini 41 "
+)
+
+robot
+(
+  name "robot42"
+  color "red"
+  pose [110.23066046396684 110.66254558371472 0 -133.81580304354429 ]
+  ctrl "coordination.so ./configExperiment26711.ini 42 "
+)
+
+robot
+(
+  name "robot43"
+  color "red"
+  pose [109.25331863140336 89.813484532804623 0 132.25166246294975 ]
+  ctrl "coordination.so ./configExperiment26711.ini 43 "
+)
+
+robot
+(
+  name "robot44"
+  color "red"
+  pose [103.66202846634104 119.80625852982354 0 -100.47526203095914 ]
+  ctrl "coordination.so ./configExperiment26711.ini 44 "
+)
+
+robot
+(
+  name "robot45"
+  color "red"
+  pose [109.59724334092863 82.207736766942162 0 118.34266427904366 ]
+  ctrl "coordination.so ./configExperiment26711.ini 45 "
+)
+
+robot
+(
+  name "robot46"
+  color "red"
+  pose [115.21780969714257 96.785765160830493 0 168.07354453951123 ]
+  ctrl "coordination.so ./configExperiment26711.ini 46 "
+)
+
+robot
+(
+  name "robot47"
+  color "red"
+  pose [85.175251294796453 112.09999886269604 0 -39.221413694322109 ]
+  ctrl "coordination.so ./configExperiment26711.ini 47 "
+)
+
+robot
+(
+  name "robot48"
+  color "red"
+  pose [86.688057013653946 94.60748830590201 0 22.052291203290213 ]
+  ctrl "coordination.so ./configExperiment26711.ini 48 "
+)
+
+robot
+(
+  name "robot49"
+  color "red"
+  pose [112.78656149137664 91.475257116615893 0 146.30878916010258 ]
+  ctrl "coordination.so ./configExperiment26711.ini 49 "
+)
+
+robot
+(
+  name "robot50"
+  color "red"
+  pose [94.023064825112456 86.237861929846602 0 66.524558532983036 ]
+  ctrl "coordination.so ./configExperiment26711.ini 50 "
+)
+
+robot
+(
+  name "robot51"
+  color "red"
+  pose [113.5236888047807 86.730639259517133 0 135.54385324940083 ]
+  ctrl "coordination.so ./configExperiment26711.ini 51 "
+)
+
+robot
+(
+  name "robot52"
+  color "red"
+  pose [97.041722188406325 85.58767036226844 0 78.400566838681684 ]
+  ctrl "coordination.so ./configExperiment26711.ini 52 "
+)
+
+robot
+(
+  name "robot53"
+  color "red"
+  pose [114.81858766295754 114.67607032584013 0 -135.2768494002521 ]
+  ctrl "coordination.so ./configExperiment26711.ini 53 "
+)
+
+robot
+(
+  name "robot54"
+  color "red"
+  pose [100.54987088913069 82.735845489894359 0 91.82427898049356 ]
+  ctrl "coordination.so ./configExperiment26711.ini 54 "
+)
+
+robot
+(
+  name "robot55"
+  color "red"
+  pose [100.54407185977935 86.094765331453829 0 92.240676172077656 ]
+  ctrl "coordination.so ./configExperiment26711.ini 55 "
+)
+
+robot
+(
+  name "robot56"
+  color "red"
+  pose [105.02488059582885 119.42753832641479 0 -104.50159655883908 ]
+  ctrl "coordination.so ./configExperiment26711.ini 56 "
+)
+
+robot
+(
+  name "robot57"
+  color "red"
+  pose [92.094846283540647 85.579694475471513 0 61.268623284995527 ]
+  ctrl "coordination.so ./configExperiment26711.ini 57 "
+)
+
+robot
+(
+  name "robot58"
+  color "red"
+  pose [91.294197950056741 115.24650159711844 0 -60.273492392152555 ]
+  ctrl "coordination.so ./configExperiment26711.ini 58 "
+)
+
+robot
+(
+  name "robot59"
+  color "red"
+  pose [113.01100296830045 89.072045815389416 0 139.97306713834405 ]
+  ctrl "coordination.so ./configExperiment26711.ini 59 "
+)
+
+robot
+(
+  name "robot60"
+  color "red"
+  pose [98.463604753401867 115.31870282341487 0 -84.272650424391045 ]
+  ctrl "coordination.so ./configExperiment26711.ini 60 "
+)
+
+robot
+(
+  name "robot61"
+  color "red"
+  pose [86.425774151647673 106.92569469716028 0 -27.031092233955881 ]
+  ctrl "coordination.so ./configExperiment26711.ini 61 "
+)
+
+robot
+(
+  name "robot62"
+  color "red"
+  pose [81.87016052317324 105.86523938874555 0 -17.927070334553722 ]
+  ctrl "coordination.so ./configExperiment26711.ini 62 "
+)
+
+robot
+(
+  name "robot63"
+  color "red"
+  pose [119.74864500994761 106.80855201373868 0 -160.97783116623759 ]
+  ctrl "coordination.so ./configExperiment26711.ini 63 "
+)
+
+robot
+(
+  name "robot64"
+  color "red"
+  pose [101.32613273472491 115.79736273087119 0 -94.798527415841832 ]
+  ctrl "coordination.so ./configExperiment26711.ini 64 "
+)
+
+robot
+(
+  name "robot65"
+  color "red"
+  pose [115.29712597808074 111.10167504825461 0 -144.03025679290297 ]
+  ctrl "coordination.so ./configExperiment26711.ini 65 "
+)
+
+robot
+(
+  name "robot66"
+  color "red"
+  pose [91.876992799298506 110.91723563214312 0 -53.348780069500222 ]
+  ctrl "coordination.so ./configExperiment26711.ini 66 "
+)
+
+robot
+(
+  name "robot67"
+  color "red"
+  pose [107.23804016058411 118.4318808193633 0 -111.43950669094922 ]
+  ctrl "coordination.so ./configExperiment26711.ini 67 "
+)
+
+robot
+(
+  name "robot68"
+  color "red"
+  pose [98.575653152831066 86.209094941005787 0 84.103307314217091 ]
+  ctrl "coordination.so ./configExperiment26711.ini 68 "
+)
+
+robot
+(
+  name "robot69"
+  color "red"
+  pose [98.133439555029128 83.90657402542476 0 83.384235072880983 ]
+  ctrl "coordination.so ./configExperiment26711.ini 69 "
+)
+
+robot
+(
+  name "robot70"
+  color "red"
+  pose [108.30084638570838 85.075314365945928 0 119.08203849568964 ]
+  ctrl "coordination.so ./configExperiment26711.ini 70 "
+)
+
+robot
+(
+  name "robot71"
+  color "red"
+  pose [114.24108787538684 107.75252762808273 0 -151.43712250515821 ]
+  ctrl "coordination.so ./configExperiment26711.ini 71 "
+)
+
+robot
+(
+  name "robot72"
+  color "red"
+  pose [111.61313595724073 91.644090807004858 0 144.26414608955383 ]
+  ctrl "coordination.so ./configExperiment26711.ini 72 "
+)
+
+robot
+(
+  name "robot73"
+  color "red"
+  pose [79.818806565107366 104.80463812939087 0 -13.391401749104269 ]
+  ctrl "coordination.so ./configExperiment26711.ini 73 "
+)
+
+robot
+(
+  name "robot74"
+  color "red"
+  pose [100.17821023088453 114.3320364262826 0 -90.712401755154147 ]
+  ctrl "coordination.so ./configExperiment26711.ini 74 "
+)
+
+robot
+(
+  name "robot75"
+  color "red"
+  pose [117.8248400177597 90.707297477804531 0 152.46541840955615 ]
+  ctrl "coordination.so ./configExperiment26711.ini 75 "
+)
+
+robot
+(
+  name "robot76"
+  color "red"
+  pose [102.33880177831189 114.04463989185111 0 -99.45449642837049 ]
+  ctrl "coordination.so ./configExperiment26711.ini 76 "
+)
+
+robot
+(
+  name "robot77"
+  color "red"
+  pose [118.05186135361126 96.843699189707507 0 170.08230049163106 ]
+  ctrl "coordination.so ./configExperiment26711.ini 77 "
+)
+
+robot
+(
+  name "robot78"
+  color "red"
+  pose [99.187031098821294 84.469796017624361 0 87.003438603132935 ]
+  ctrl "coordination.so ./configExperiment26711.ini 78 "
+)
+
+robot
+(
+  name "robot79"
+  color "red"
+  pose [107.58136272142536 113.62711323720228 0 -119.08911282196642 ]
+  ctrl "coordination.so ./configExperiment26711.ini 79 "
+)
+
+robot
+(
+  name "robot80"
+  color "red"
+  pose [81.366418952585903 108.44260239763611 0 -24.374583307653676 ]
+  ctrl "coordination.so ./configExperiment26711.ini 80 "
+)
+
+robot
+(
+  name "robot81"
+  color "red"
+  pose [90.004236899799537 117.57941265424043 0 -60.377171169966481 ]
+  ctrl "coordination.so ./configExperiment26711.ini 81 "
+)
+
+robot
+(
+  name "robot82"
+  color "red"
+  pose [83.793028148547535 104.15739877633753 0 -14.38724912703038 ]
+  ctrl "coordination.so ./configExperiment26711.ini 82 "
+)
+
+robot
+(
+  name "robot83"
+  color "red"
+  pose [87.056040036720972 85.665508747406221 0 47.918152213096612 ]
+  ctrl "coordination.so ./configExperiment26711.ini 83 "
+)
+
+robot
+(
+  name "robot84"
+  color "red"
+  pose [91.730178184917335 83.267641434316573 0 63.699518032371977 ]
+  ctrl "coordination.so ./configExperiment26711.ini 84 "
+)
+
+robot
+(
+  name "robot85"
+  color "red"
+  pose [85.48654674271927 109.6935945308046 0 -33.739122804254308 ]
+  ctrl "coordination.so ./configExperiment26711.ini 85 "
+)
+
+robot
+(
+  name "robot86"
+  color "red"
+  pose [88.821216007683432 90.034775698855043 0 41.715114377439001 ]
+  ctrl "coordination.so ./configExperiment26711.ini 86 "
+)
+
+robot
+(
+  name "robot87"
+  color "red"
+  pose [117.13333167001086 89.526484386298506 0 148.56277445331213 ]
+  ctrl "coordination.so ./configExperiment26711.ini 87 "
+)
+
+robot
+(
+  name "robot88"
+  color "red"
+  pose [105.04081165077415 116.9739278879954 0 -106.54003936797382 ]
+  ctrl "coordination.so ./configExperiment26711.ini 88 "
+)
+
+robot
+(
+  name "robot89"
+  color "red"
+  pose [115.55286886666242 90.480736702614863 0 148.53093545883897 ]
+  ctrl "coordination.so ./configExperiment26711.ini 89 "
+)
+
+robot
+(
+  name "robot90"
+  color "red"
+  pose [97.430200121857652 115.54809173609073 0 -80.614957530051484 ]
+  ctrl "coordination.so ./configExperiment26711.ini 90 "
+)
+
+robot
+(
+  name "robot91"
+  color "red"
+  pose [79.680994022433552 98.876084578233304 0 3.1660040840506358 ]
+  ctrl "coordination.so ./configExperiment26711.ini 91 "
+)
+
+robot
+(
+  name "robot92"
+  color "red"
+  pose [116.1159989154025 109.10234588246843 0 -150.54215870797634 ]
+  ctrl "coordination.so ./configExperiment26711.ini 92 "
+)
+
+robot
+(
+  name "robot93"
+  color "red"
+  pose [84.270377598525556 95.857218047152088 0 14.755170755088313 ]
+  ctrl "coordination.so ./configExperiment26711.ini 93 "
+)
+
+robot
+(
+  name "robot94"
+  color "red"
+  pose [97.582882668815998 80.151237476987404 0 83.05689392611383 ]
+  ctrl "coordination.so ./configExperiment26711.ini 94 "
+)
+
+robot
+(
+  name "robot95"
+  color "red"
+  pose [83.022522855332269 108.61651625958392 0 -26.908992044627681 ]
+  ctrl "coordination.so ./configExperiment26711.ini 95 "
+)
+
+robot
+(
+  name "robot96"
+  color "red"
+  pose [103.20515922386525 114.76564645966269 0 -102.24712109193207 ]
+  ctrl "coordination.so ./configExperiment26711.ini 96 "
+)
+
+robot
+(
+  name "robot97"
+  color "red"
+  pose [86.337540066767701 99.084510605921963 0 3.8335251063108324 ]
+  ctrl "coordination.so ./configExperiment26711.ini 97 "
+)
+
+robot
+(
+  name "robot98"
+  color "red"
+  pose [119.34623189786851 96.530675026722363 0 169.83331387862566 ]
+  ctrl "coordination.so ./configExperiment26711.ini 98 "
+)
+
+robot
+(
+  name "robot99"
+  color "red"
+  pose [85.631323900342863 107.87789924899572 0 -28.734591677784916 ]
+  ctrl "coordination.so ./configExperiment26711.ini 99 "
+)
+
+robot
+(
+  name "robot100"
+  color "red"
+  pose [112.72462214880693 106.7551261521124 0 -152.03748738393188 ]
+  ctrl "coordination.so ./configExperiment26711.ini 100 "
+)
+
+robot
+(
+  name "robot101"
+  color "red"
+  pose [85.076302753853838 95.247535338295719 0 17.664122488349673 ]
+  ctrl "coordination.so ./configExperiment26711.ini 101 "
+)
+
+robot
+(
+  name "robot102"
+  color "red"
+  pose [82.998612571970568 90.245223990105728 0 29.845631718635563 ]
+  ctrl "coordination.so ./configExperiment26711.ini 102 "
+)
+
+robot
+(
+  name "robot103"
+  color "red"
+  pose [98.739046331631059 118.27440302794255 0 -86.052785441279426 ]
+  ctrl "coordination.so ./configExperiment26711.ini 103 "
+)
+
+robot
+(
+  name "robot104"
+  color "red"
+  pose [116.6369123523329 108.21334551687718 0 -153.72527210041883 ]
+  ctrl "coordination.so ./configExperiment26711.ini 104 "
+)
+
+robot
+(
+  name "robot105"
+  color "red"
+  pose [111.32835391354959 114.58380123799363 0 -127.83922059461476 ]
+  ctrl "coordination.so ./configExperiment26711.ini 105 "
+)
+
+robot
+(
+  name "robot106"
+  color "red"
+  pose [82.734781448334743 107.06300940885421 0 -22.248925454914581 ]
+  ctrl "coordination.so ./configExperiment26711.ini 106 "
+)
+
+robot
+(
+  name "robot107"
+  color "red"
+  pose [89.920701103106367 84.805745095715039 0 56.441196575760841 ]
+  ctrl "coordination.so ./configExperiment26711.ini 107 "
+)
+
+robot
+(
+  name "robot108"
+  color "red"
+  pose [83.21607606249195 101.47668400611667 0 -5.0280529260635394 ]
+  ctrl "coordination.so ./configExperiment26711.ini 108 "
+)
+
+robot
+(
+  name "robot109"
+  color "red"
+  pose [106.78207314521212 80.91978501723618 0 109.56778513267638 ]
+  ctrl "coordination.so ./configExperiment26711.ini 109 "
+)
+
+robot
+(
+  name "robot110"
+  color "red"
+  pose [101.44265459973927 120.80677932164164 0 -93.966300655156388 ]
+  ctrl "coordination.so ./configExperiment26711.ini 110 "
+)
+
+robot
+(
+  name "robot111"
+  color "red"
+  pose [90.396855245260767 87.418846111860475 0 52.645649872720234 ]
+  ctrl "coordination.so ./configExperiment26711.ini 111 "
+)
+
+robot
+(
+  name "robot112"
+  color "red"
+  pose [108.82365555251489 118.31871318459416 0 -115.71892725303769 ]
+  ctrl "coordination.so ./configExperiment26711.ini 112 "
+)
+
+robot
+(
+  name "robot113"
+  color "red"
+  pose [111.82987795740958 108.94852041605115 0 -142.89490437135103 ]
+  ctrl "coordination.so ./configExperiment26711.ini 113 "
+)
+
+robot
+(
+  name "robot114"
+  color "red"
+  pose [114.56750093002229 88.534347492755586 0 141.79475460201505 ]
+  ctrl "coordination.so ./configExperiment26711.ini 114 "
+)
+
+robot
+(
+  name "robot115"
+  color "red"
+  pose [87.962998364867701 110.40725907600867 0 -40.846877116709948 ]
+  ctrl "coordination.so ./configExperiment26711.ini 115 "
+)
+
+robot
+(
+  name "robot116"
+  color "red"
+  pose [110.44422372820971 117.91237927253984 0 -120.24530449882151 ]
+  ctrl "coordination.so ./configExperiment26711.ini 116 "
+)
+
+robot
+(
+  name "robot117"
+  color "red"
+  pose [101.49312304891929 118.71086498520398 0 -94.562522694468512 ]
+  ctrl "coordination.so ./configExperiment26711.ini 117 "
+)
+
+robot
+(
+  name "robot118"
+  color "red"
+  pose [109.3391467186386 86.937407542890085 0 125.56300649419428 ]
+  ctrl "coordination.so ./configExperiment26711.ini 118 "
+)
+
+robot
+(
+  name "robot119"
+  color "red"
+  pose [118.86479095493607 94.178422979364967 0 162.85004440695047 ]
+  ctrl "coordination.so ./configExperiment26711.ini 119 "
+)
+
+robot
+(
+  name "robot120"
+  color "red"
+  pose [80.449602263327222 100.36790690056846 0 -1.0780867561698071 ]
+  ctrl "coordination.so ./configExperiment26711.ini 120 "
+)
+
+robot
+(
+  name "robot121"
+  color "red"
+  pose [94.441947359977917 116.986969636438 0 -71.882159058004632 ]
+  ctrl "coordination.so ./configExperiment26711.ini 121 "
+)
+
+robot
+(
+  name "robot122"
+  color "red"
+  pose [111.23484875698219 90.616603780093158 0 140.13121571391824 ]
+  ctrl "coordination.so ./configExperiment26711.ini 122 "
+)
+
+robot
+(
+  name "robot123"
+  color "red"
+  pose [118.88844575728466 105.47019899640974 0 -163.84868949651718 ]
+  ctrl "coordination.so ./configExperiment26711.ini 123 "
+)
+
+robot
+(
+  name "robot124"
+  color "red"
+  pose [116.26495319142873 106.70334672683384 0 -157.60175613686442 ]
+  ctrl "coordination.so ./configExperiment26711.ini 124 "
+)
+
+robot
+(
+  name "robot125"
+  color "red"
+  pose [98.548021752929472 114.10895963105108 0 -84.12427363917233 ]
+  ctrl "coordination.so ./configExperiment26711.ini 125 "
+)
+
+robot
+(
+  name "robot126"
+  color "red"
+  pose [116.12885670869633 91.518683542087118 0 152.26248130202293 ]
+  ctrl "coordination.so ./configExperiment26711.ini 126 "
+)
+
+robot
+(
+  name "robot127"
+  color "red"
+  pose [87.042191944809446 113.0967707294398 0 -45.305585414171233 ]
+  ctrl "coordination.so ./configExperiment26711.ini 127 "
+)
+
+robot
+(
+  name "robot128"
+  color "red"
+  pose [106.0796792688335 87.076403545507873 0 115.19381610676648 ]
+  ctrl "coordination.so ./configExperiment26711.ini 128 "
+)
+
+robot
+(
+  name "robot129"
+  color "red"
+  pose [81.451160608030207 94.926232703733319 0 15.298215486109257 ]
+  ctrl "coordination.so ./configExperiment26711.ini 129 "
+)
+
+robot
+(
+  name "robot130"
+  color "red"
+  pose [86.750993558762332 87.303863085444206 0 43.779259119182825 ]
+  ctrl "coordination.so ./configExperiment26711.ini 130 "
+)
+
+robot
+(
+  name "robot131"
+  color "red"
+  pose [115.71855478995292 99.31553957784125 0 177.50664515420794 ]
+  ctrl "coordination.so ./configExperiment26711.ini 131 "
+)
+
+robot
+(
+  name "robot132"
+  color "red"
+  pose [84.414148069875111 113.96535036572841 0 -41.861210614442832 ]
+  ctrl "coordination.so ./configExperiment26711.ini 132 "
+)
+
+robot
+(
+  name "robot133"
+  color "red"
+  pose [119.16944084572789 101.56756749430177 0 -175.32508000731468 ]
+  ctrl "coordination.so ./configExperiment26711.ini 133 "
+)
+
+robot
+(
+  name "robot134"
+  color "red"
+  pose [94.83902518935021 112.58445728402522 0 -67.7011195756495 ]
+  ctrl "coordination.so ./configExperiment26711.ini 134 "
+)
+
+robot
+(
+  name "robot135"
+  color "red"
+  pose [117.61013279759317 103.50803766243372 0 -168.73383751139048 ]
+  ctrl "coordination.so ./configExperiment26711.ini 135 "
+)
+
+robot
+(
+  name "robot136"
+  color "red"
+  pose [97.25468812777747 119.39797700981717 0 -81.944673042744412 ]
+  ctrl "coordination.so ./configExperiment26711.ini 136 "
+)
+
+robot
+(
+  name "robot137"
+  color "red"
+  pose [113.66706944784114 111.97667167696864 0 -138.77139743417501 ]
+  ctrl "coordination.so ./configExperiment26711.ini 137 "
+)
+
+robot
+(
+  name "robot138"
+  color "red"
+  pose [108.518170156008 114.51391996386806 0 -120.40852731093766 ]
+  ctrl "coordination.so ./configExperiment26711.ini 138 "
+)
+
+robot
+(
+  name "robot139"
+  color "red"
+  pose [87.618290237436298 91.291584498093883 0 35.119831804186092 ]
+  ctrl "coordination.so ./configExperiment26711.ini 139 "
+)
+
+robot
+(
+  name "robot140"
+  color "red"
+  pose [80.617325111459479 107.68390546343501 0 -21.624940875917687 ]
+  ctrl "coordination.so ./configExperiment26711.ini 140 "
+)
+
+robot
+(
+  name "robot141"
+  color "red"
+  pose [101.05120454591741 84.016666086862571 0 93.762854933738694 ]
+  ctrl "coordination.so ./configExperiment26711.ini 141 "
+)
+
+robot
+(
+  name "robot142"
+  color "red"
+  pose [86.307343351472753 97.555259716601313 0 10.123142972588539 ]
+  ctrl "coordination.so ./configExperiment26711.ini 142 "
+)
+
+robot
+(
+  name "robot143"
+  color "red"
+  pose [92.271649493323309 84.326476648434294 0 63.752869516611113 ]
+  ctrl "coordination.so ./configExperiment26711.ini 143 "
+)
+
+robot
+(
+  name "robot144"
+  color "red"
+  pose [91.669850236220967 88.215226421377707 0 54.745152164250626 ]
+  ctrl "coordination.so ./configExperiment26711.ini 144 "
+)
+
+robot
+(
+  name "robot145"
+  color "red"
+  pose [81.974749897804315 99.909173145180176 0 0.28870342299340346 ]
+  ctrl "coordination.so ./configExperiment26711.ini 145 "
+)
+
+robot
+(
+  name "robot146"
+  color "red"
+  pose [97.01208399334331 113.28722097244852 0 -77.326629795134082 ]
+  ctrl "coordination.so ./configExperiment26711.ini 146 "
+)
+
+robot
+(
+  name "robot147"
+  color "red"
+  pose [112.02512033275158 111.91917755464371 0 -135.25350647047162 ]
+  ctrl "coordination.so ./configExperiment26711.ini 147 "
+)
+
+robot
+(
+  name "robot148"
+  color "red"
+  pose [84.678658540285255 100.28882388684578 0 -1.0799596086144627 ]
+  ctrl "coordination.so ./configExperiment26711.ini 148 "
+)
+
+robot
+(
+  name "robot149"
+  color "red"
+  pose [89.792737782590791 108.46067516262902 0 -39.654921367764487 ]
+  ctrl "coordination.so ./configExperiment26711.ini 149 "
+)
+
+robot
+(
+  name "robot150"
+  color "red"
+  pose [80.169547322303373 102.83729074633855 0 -8.1424725987017226 ]
+  ctrl "coordination.so ./configExperiment26711.ini 150 "
+)
+
+robot
+(
+  name "robot151"
+  color "red"
+  pose [87.336441435023232 88.223218734579604 0 42.922028973698595 ]
+  ctrl "coordination.so ./configExperiment26711.ini 151 "
+)
+
+robot
+(
+  name "robot152"
+  color "red"
+  pose [84.504482593567772 86.503919618700863 0 41.054781340062597 ]
+  ctrl "coordination.so ./configExperiment26711.ini 152 "
+)
+
+robot
+(
+  name "robot153"
+  color "red"
+  pose [89.718220913684036 115.86657286667912 0 -57.056152503937476 ]
+  ctrl "coordination.so ./configExperiment26711.ini 153 "
+)
+
+robot
+(
+  name "robot154"
+  color "red"
+  pose [91.669483931200205 89.663320951037107 0 51.134032644331448 ]
+  ctrl "coordination.so ./configExperiment26711.ini 154 "
+)
+
+robot
+(
+  name "robot155"
+  color "red"
+  pose [87.773478165643638 87.144925324724909 0 46.43555011600256 ]
+  ctrl "coordination.so ./configExperiment26711.ini 155 "
+)
+
+robot
+(
+  name "robot156"
+  color "red"
+  pose [92.29477467342474 114.8460973616838 0 -62.570380959659822 ]
+  ctrl "coordination.so ./configExperiment26711.ini 156 "
+)
+
+robot
+(
+  name "robot157"
+  color "red"
+  pose [88.474081972031868 83.285043451901473 0 55.411516986787291 ]
+  ctrl "coordination.so ./configExperiment26711.ini 157 "
+)
+
+robot
+(
+  name "robot158"
+  color "red"
+  pose [110.36687240868561 86.140034974415187 0 126.79547751322387 ]
+  ctrl "coordination.so ./configExperiment26711.ini 158 "
+)
+
+robot
+(
+  name "robot159"
+  color "red"
+  pose [84.533976703540532 93.512678481936845 0 22.755921967327595 ]
+  ctrl "coordination.so ./configExperiment26711.ini 159 "
+)
+
+robot
+(
+  name "robot160"
+  color "red"
+  pose [84.615136361131789 110.69848362740278 0 -34.814373459666989 ]
+  ctrl "coordination.so ./configExperiment26711.ini 160 "
+)
+
+robot
+(
+  name "robot161"
+  color "red"
+  pose [112.92393356294095 103.39596809411171 0 -165.277448091656 ]
+  ctrl "coordination.so ./configExperiment26711.ini 161 "
+)
+
+robot
+(
+  name "robot162"
+  color "red"
+  pose [114.74401366731539 103.17849684150156 0 -167.83442577347159 ]
+  ctrl "coordination.so ./configExperiment26711.ini 162 "
+)
+
+robot
+(
+  name "robot163"
+  color "red"
+  pose [97.934076254931625 116.46883148684299 0 -82.84991087391974 ]
+  ctrl "coordination.so ./configExperiment26711.ini 163 "
+)
+
+robot
+(
+  name "robot164"
+  color "red"
+  pose [117.75673569986532 108.26629237603746 0 -155.03661146387461 ]
+  ctrl "coordination.so ./configExperiment26711.ini 164 "
+)
+
+robot
+(
+  name "robot165"
+  color "red"
+  pose [95.626103464485183 115.14120788722148 0 -73.887385725975037 ]
+  ctrl "coordination.so ./configExperiment26711.ini 165 "
+)
+
+robot
+(
+  name "robot166"
+  color "red"
+  pose [111.53023843979584 93.426038532405684 0 150.31038835644722 ]
+  ctrl "coordination.so ./configExperiment26711.ini 166 "
+)
+
+robot
+(
+  name "robot167"
+  color "red"
+  pose [87.797815345184873 108.91220663858721 0 -36.14356845617295 ]
+  ctrl "coordination.so ./configExperiment26711.ini 167 "
+)
+
+robot
+(
+  name "robot168"
+  color "red"
+  pose [105.79276365677566 115.41463932535478 0 -110.59603191912176 ]
+  ctrl "coordination.so ./configExperiment26711.ini 168 "
+)
+
+robot
+(
+  name "robot169"
+  color "red"
+  pose [104.03874973038023 85.551570277464634 0 105.6171992048621 ]
+  ctrl "coordination.so ./configExperiment26711.ini 169 "
+)
+
+robot
+(
+  name "robot170"
+  color "red"
+  pose [90.318731178662063 111.6683723561212 0 -50.317446850240245 ]
+  ctrl "coordination.so ./configExperiment26711.ini 170 "
+)
+
+robot
+(
+  name "robot171"
+  color "red"
+  pose [113.52989898743095 100.13288646643021 0 -179.43727673962712 ]
+  ctrl "coordination.so ./configExperiment26711.ini 171 "
+)
+
+robot
+(
+  name "robot172"
+  color "red"
+  pose [84.428869281196739 98.423683367736814 0 5.7805466651916495 ]
+  ctrl "coordination.so ./configExperiment26711.ini 172 "
+)
+
+robot
+(
+  name "robot173"
+  color "red"
+  pose [108.55444343515356 112.52967473519881 0 -124.32270862162115 ]
+  ctrl "coordination.so ./configExperiment26711.ini 173 "
+)
+
+robot
+(
+  name "robot174"
+  color "red"
+  pose [103.31900809777056 116.26004933039982 0 -101.53675412759185 ]
+  ctrl "coordination.so ./configExperiment26711.ini 174 "
+)
+
+robot
+(
+  name "robot175"
+  color "red"
+  pose [115.0461538209139 112.85514664216451 0 -139.49005510658029 ]
+  ctrl "coordination.so ./configExperiment26711.ini 175 "
+)
+
+robot
+(
+  name "robot176"
+  color "red"
+  pose [120.64372004744051 98.503316717250627 0 175.8532736822963 ]
+  ctrl "coordination.so ./configExperiment26711.ini 176 "
+)
+
+robot
+(
+  name "robot177"
+  color "red"
+  pose [108.24952091352083 82.883012108532867 0 115.7317109964788 ]
+  ctrl "coordination.so ./configExperiment26711.ini 177 "
+)
+
+robot
+(
+  name "robot178"
+  color "red"
+  pose [120.58060411547072 100.05648111389705 0 -179.84275868162513 ]
+  ctrl "coordination.so ./configExperiment26711.ini 178 "
+)
+
+robot
+(
+  name "robot179"
+  color "red"
+  pose [103.60055749768222 117.55339559198009 0 -101.59173991531134 ]
+  ctrl "coordination.so ./configExperiment26711.ini 179 "
+)
+
+robot
+(
+  name "robot180"
+  color "red"
+  pose [104.02606888685214 80.640897785586105 0 101.74821227788927 ]
+  ctrl "coordination.so ./configExperiment26711.ini 180 "
+)
+
+robot
+(
+  name "robot181"
+  color "red"
+  pose [93.044726979213721 87.241185085540138 0 61.403664965182543 ]
+  ctrl "coordination.so ./configExperiment26711.ini 181 "
+)
+
+robot
+(
+  name "robot182"
+  color "red"
+  pose [85.65883812190711 92.558184551790561 0 27.425385843962413 ]
+  ctrl "coordination.so ./configExperiment26711.ini 182 "
+)
+
+robot
+(
+  name "robot183"
+  color "red"
+  pose [84.254496436007813 89.74717591116962 0 33.070519510656595 ]
+  ctrl "coordination.so ./configExperiment26711.ini 183 "
+)
+
+robot
+(
+  name "robot184"
+  color "red"
+  pose [87.764772793330721 94.210699265400621 0 25.321948584169132 ]
+  ctrl "coordination.so ./configExperiment26711.ini 184 "
+)
+
+robot
+(
+  name "robot185"
+  color "red"
+  pose [85.898977183312496 114.08617051074191 0 -44.969809893518686 ]
+  ctrl "coordination.so ./configExperiment26711.ini 185 "
+)
+
+robot
+(
+  name "robot186"
+  color "red"
+  pose [95.845978469018817 120.0313233449146 0 -78.284274637699127 ]
+  ctrl "coordination.so ./configExperiment26711.ini 186 "
+)
+
+robot
+(
+  name "robot187"
+  color "red"
+  pose [114.11143849389329 96.050415098482063 0 164.36384512111545 ]
+  ctrl "coordination.so ./configExperiment26711.ini 187 "
+)
+
+robot
+(
+  name "robot188"
+  color "red"
+  pose [83.365845872335584 111.02320458678543 0 -33.531839512288585 ]
+  ctrl "coordination.so ./configExperiment26711.ini 188 "
+)
+
+robot
+(
+  name "robot189"
+  color "red"
+  pose [115.10876900513816 89.408422994290575 0 144.96870540082452 ]
+  ctrl "coordination.so ./configExperiment26711.ini 189 "
+)
+
+robot
+(
+  name "robot190"
+  color "red"
+  pose [118.25368257441448 109.45452685242017 0 -152.61802302673459 ]
+  ctrl "coordination.so ./configExperiment26711.ini 190 "
+)
+
+robot
+(
+  name "robot191"
+  color "red"
+  pose [86.196916407566704 90.707650744450632 0 33.948763757944107 ]
+  ctrl "coordination.so ./configExperiment26711.ini 191 "
+)
+
+robot
+(
+  name "robot192"
+  color "red"
+  pose [100.05617567619161 115.98462773724782 0 -90.201356951147332 ]
+  ctrl "coordination.so ./configExperiment26711.ini 192 "
+)
+
+robot
+(
+  name "robot193"
+  color "red"
+  pose [85.722678762302451 86.620682560917388 0 43.140274453908205 ]
+  ctrl "coordination.so ./configExperiment26711.ini 193 "
+)
+
+robot
+(
+  name "robot194"
+  color "red"
+  pose [119.35459147097893 108.05268893909576 0 -157.40971449762583 ]
+  ctrl "coordination.so ./configExperiment26711.ini 194 "
+)
+
+robot
+(
+  name "robot195"
+  color "red"
+  pose [82.888569605889941 95.46367545470261 0 14.847844429314128 ]
+  ctrl "coordination.so ./configExperiment26711.ini 195 "
+)
+
+robot
+(
+  name "robot196"
+  color "red"
+  pose [97.489952040851406 120.65356467194481 0 -83.07076882570982 ]
+  ctrl "coordination.so ./configExperiment26711.ini 196 "
+)
+
+robot
+(
+  name "robot197"
+  color "red"
+  pose [114.51919065441967 92.053645110807508 0 151.30810657516122 ]
+  ctrl "coordination.so ./configExperiment26711.ini 197 "
+)
+
+robot
+(
+  name "robot198"
+  color "red"
+  pose [117.64749606373653 101.47064424478481 0 -175.23629520088434 ]
+  ctrl "coordination.so ./configExperiment26711.ini 198 "
+)
+
+robot
+(
+  name "robot199"
+  color "red"
+  pose [91.619140824540381 117.85900603698695 0 -64.860313721001148 ]
+  ctrl "coordination.so ./configExperiment26711.ini 199 "
+)
+
+robot
+(
+  name "robot200"
+  color "red"
+  pose [96.145104402396569 116.17972960285159 0 -76.598859652876868 ]
+  ctrl "coordination.so ./configExperiment26711.ini 200 "
+)
+
+robot
+(
+  name "robot201"
+  color "red"
+  pose [107.14773314177189 85.352059047090265 0 116.01091621443628 ]
+  ctrl "coordination.so ./configExperiment26711.ini 201 "
+)
+
+robot
+(
+  name "robot202"
+  color "red"
+  pose [111.42678288187938 85.512715445732567 0 128.26445750892162 ]
+  ctrl "coordination.so ./configExperiment26711.ini 202 "
+)
+
+robot
+(
+  name "robot203"
+  color "red"
+  pose [118.67393858244739 103.16601183813913 0 -170.37747608497742 ]
+  ctrl "coordination.so ./configExperiment26711.ini 203 "
+)
+
+robot
+(
+  name "robot204"
+  color "red"
+  pose [113.89160181138452 108.88813387020387 0 -147.38804703578353 ]
+  ctrl "coordination.so ./configExperiment26711.ini 204 "
+)
+
+robot
+(
+  name "robot205"
+  color "red"
+  pose [96.990770222209392 117.2902543980824 0 -80.127023644745364 ]
+  ctrl "coordination.so ./configExperiment26711.ini 205 "
+)
+
+robot
+(
+  name "robot206"
+  color "red"
+  pose [93.424768415598123 85.103206368316634 0 66.184022761881337 ]
+  ctrl "coordination.so ./configExperiment26711.ini 206 "
+)
+
+robot
+(
+  name "robot207"
+  color "red"
+  pose [88.559235014689193 113.7591083896308 0 -50.256313607096679 ]
+  ctrl "coordination.so ./configExperiment26711.ini 207 "
+)
+
+robot
+(
+  name "robot208"
+  color "red"
+  pose [85.190221537938314 101.16353889001965 0 -4.4922486506402608 ]
+  ctrl "coordination.so ./configExperiment26711.ini 208 "
+)
+
+robot
+(
+  name "robot209"
+  color "red"
+  pose [113.27780772347677 104.90167306504068 0 -159.73772825673223 ]
+  ctrl "coordination.so ./configExperiment26711.ini 209 "
+)
+
+robot
+(
+  name "robot210"
+  color "red"
+  pose [102.20215457811634 83.397759943698674 0 97.555722109973402 ]
+  ctrl "coordination.so ./configExperiment26711.ini 210 "
+)
+
+robot
+(
+  name "robot211"
+  color "red"
+  pose [111.47647848831527 115.77034526981349 0 -126.04432789608836 ]
+  ctrl "coordination.so ./configExperiment26711.ini 211 "
+)
+
+robot
+(
+  name "robot212"
+  color "red"
+  pose [117.50728241285103 105.09281625392047 0 -163.78044404089451 ]
+  ctrl "coordination.so ./configExperiment26711.ini 212 "
+)
+
+robot
+(
+  name "robot213"
+  color "red"
+  pose [116.34169878107457 93.687905470545886 0 158.88060037046671 ]
+  ctrl "coordination.so ./configExperiment26711.ini 213 "
+)
+
+robot
+(
+  name "robot214"
+  color "red"
+  pose [119.4044795172513 95.302571326772323 0 166.39165699481967 ]
+  ctrl "coordination.so ./configExperiment26711.ini 214 "
+)
+
+robot
+(
+  name "robot215"
+  color "red"
+  pose [104.75270428874603 114.83821673561478 0 -107.76034455746414 ]
+  ctrl "coordination.so ./configExperiment26711.ini 215 "
+)
+
+robot
+(
+  name "robot216"
+  color "red"
+  pose [92.866938182752904 113.25859991660525 0 -61.719966139644399 ]
+  ctrl "coordination.so ./configExperiment26711.ini 216 "
+)
+
+robot
+(
+  name "robot217"
+  color "red"
+  pose [115.7120073769678 87.58780339982998 0 141.6919138468802 ]
+  ctrl "coordination.so ./configExperiment26711.ini 217 "
+)
+
+robot
+(
+  name "robot218"
+  color "red"
+  pose [111.64510417392208 117.36564976369677 0 -123.84512118995188 ]
+  ctrl "coordination.so ./configExperiment26711.ini 218 "
+)
+
+robot
+(
+  name "robot219"
+  color "red"
+  pose [92.746014221359019 117.92956344078141 0 -67.97261076048018 ]
+  ctrl "coordination.so ./configExperiment26711.ini 219 "
+)
+
+robot
+(
+  name "robot220"
+  color "red"
+  pose [114.36776136457628 104.73998137458166 0 -161.74207247793674 ]
+  ctrl "coordination.so ./configExperiment26711.ini 220 "
+)
+
+robot
+(
+  name "robot221"
+  color "red"
+  pose [83.550397165116379 91.373703314087209 0 27.672858014702793 ]
+  ctrl "coordination.so ./configExperiment26711.ini 221 "
+)
+
+robot
+(
+  name "robot222"
+  color "red"
+  pose [113.5454039348988 115.64601689230463 0 -130.8840936049819 ]
+  ctrl "coordination.so ./configExperiment26711.ini 222 "
+)
+
+robot
+(
+  name "robot223"
+  color "red"
+  pose [94.534483570099141 88.187306115833934 0 65.170886535197496 ]
+  ctrl "coordination.so ./configExperiment26711.ini 223 "
+)
+
+robot
+(
+  name "robot224"
+  color "red"
+  pose [112.67337084141934 108.39690754135064 0 -146.47301528602839 ]
+  ctrl "coordination.so ./configExperiment26711.ini 224 "
+)
+
+robot
+(
+  name "robot225"
+  color "red"
+  pose [105.90765551252798 118.71900301685368 0 -107.5155240856111 ]
+  ctrl "coordination.so ./configExperiment26711.ini 225 "
+)
+
+robot
+(
+  name "robot226"
+  color "red"
+  pose [115.22194456008165 109.67350032029077 0 -147.56416339427233 ]
+  ctrl "coordination.so ./configExperiment26711.ini 226 "
+)
+
+robot
+(
+  name "robot227"
+  color "red"
+  pose [99.409904610410564 82.18119139452034 0 88.103261310607166 ]
+  ctrl "coordination.so ./configExperiment26711.ini 227 "
+)
+
+robot
+(
+  name "robot228"
+  color "red"
+  pose [93.949216470336026 118.48311170239532 0 -71.873197462409735 ]
+  ctrl "coordination.so ./configExperiment26711.ini 228 "
+)
+
+robot
+(
+  name "robot229"
+  color "red"
+  pose [115.12606835014137 86.407610040399987 0 138.05691562592986 ]
+  ctrl "coordination.so ./configExperiment26711.ini 229 "
+)
+
+robot
+(
+  name "robot230"
+  color "red"
+  pose [87.757535360343198 106.75615713678476 0 -28.89265894889833 ]
+  ctrl "coordination.so ./configExperiment26711.ini 230 "
+)
+
+robot
+(
+  name "robot231"
+  color "red"
+  pose [114.65604936346979 101.60656783291282 0 -173.74432381242514 ]
+  ctrl "coordination.so ./configExperiment26711.ini 231 "
+)
+
+robot
+(
+  name "robot232"
+  color "red"
+  pose [106.27694251462134 117.53564824248063 0 -109.6949937567115 ]
+  ctrl "coordination.so ./configExperiment26711.ini 232 "
+)
+
+robot
+(
+  name "robot233"
+  color "red"
+  pose [117.84507842670155 94.841683770446309 0 163.8774804957211 ]
+  ctrl "coordination.so ./configExperiment26711.ini 233 "
+)
+
+robot
+(
+  name "robot234"
+  color "red"
+  pose [90.316586505518075 118.59512303792734 0 -62.491745632141829 ]
+  ctrl "coordination.so ./configExperiment26711.ini 234 "
+)
+
+robot
+(
+  name "robot235"
+  color "red"
+  pose [89.15233011146114 92.19711915334544 0 35.72799319401382 ]
+  ctrl "coordination.so ./configExperiment26711.ini 235 "
+)
+
+robot
+(
+  name "robot236"
+  color "red"
+  pose [108.06895280113024 89.090660372754428 0 126.4880049973726 ]
+  ctrl "coordination.so ./configExperiment26711.ini 236 "
+)
+
+robot
+(
+  name "robot237"
+  color "red"
+  pose [84.2185278492435 112.60376078801413 0 -38.612364828586585 ]
+  ctrl "coordination.so ./configExperiment26711.ini 237 "
+)
+
+robot
+(
+  name "robot238"
+  color "red"
+  pose [107.45780319414857 87.263875304724294 0 120.35166045650841 ]
+  ctrl "coordination.so ./configExperiment26711.ini 238 "
+)
+
+robot
+(
+  name "robot239"
+  color "red"
+  pose [89.753968572453829 113.2390278862014 0 -52.262770906090743 ]
+  ctrl "coordination.so ./configExperiment26711.ini 239 "
+)
+
+robot
+(
+  name "robot240"
+  color "red"
+  pose [119.57963247786098 97.751017654756765 0 173.44753051176667 ]
+  ctrl "coordination.so ./configExperiment26711.ini 240 "
+)
+
+robot
+(
+  name "robot241"
+  color "red"
+  pose [110.44545004219188 88.701615793006368 0 132.7536397241056 ]
+  ctrl "coordination.so ./configExperiment26711.ini 241 "
+)
+
+robot
+(
+  name "robot242"
+  color "red"
+  pose [105.09401044330342 83.326093504583341 0 106.98832685127852 ]
+  ctrl "coordination.so ./configExperiment26711.ini 242 "
+)
+
+robot
+(
+  name "robot243"
+  color "red"
+  pose [81.376772080196332 102.59045082672586 0 -7.9189079627394774 ]
+  ctrl "coordination.so ./configExperiment26711.ini 243 "
+)
+
+robot
+(
+  name "robot244"
+  color "red"
+  pose [113.0760264903447 101.9354848496578 0 -171.58033836632967 ]
+  ctrl "coordination.so ./configExperiment26711.ini 244 "
+)
+
+robot
+(
+  name "robot245"
+  color "red"
+  pose [91.376389685582694 116.74457873367098 0 -62.751120775938048 ]
+  ctrl "coordination.so ./configExperiment26711.ini 245 "
+)
+
+robot
+(
+  name "robot246"
+  color "red"
+  pose [84.515670366092763 105.41223861782663 0 -19.266055393964066 ]
+  ctrl "coordination.so ./configExperiment26711.ini 246 "
+)
+
+robot
+(
+  name "robot247"
+  color "red"
+  pose [91.174462732884109 84.52167152931797 0 60.308785904198878 ]
+  ctrl "coordination.so ./configExperiment26711.ini 247 "
+)
+
+robot
+(
+  name "robot248"
+  color "red"
+  pose [104.01495085855592 87.451574331004494 0 107.74241281673315 ]
+  ctrl "coordination.so ./configExperiment26711.ini 248 "
+)
+
+robot
+(
+  name "robot249"
+  color "red"
+  pose [99.654628886253619 80.770993747265379 0 88.971024323254809 ]
+  ctrl "coordination.so ./configExperiment26711.ini 249 "
+)
+

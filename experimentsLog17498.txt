@@ -1,0 +1,4 @@
+Log for experiment.sh 40 d 1.0 3.0 0.5
+******* test for d = 1.0  ********
+Stage 4.3.0 [GUI disabled]
+ [Loading ./automatic14022.world][Include map.inc][Include sick.inc][Include pioneer.inc]
