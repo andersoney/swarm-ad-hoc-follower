@@ -49,7 +49,11 @@ class SQF : public Robot
     #ifdef DEBUG_FORCES
       , ForceVisualizer& fv
     #endif
-    );
+  );
+  #ifdef mudancas2
+        static double multiplicador_repulsao;
+        static int qtd_sem_aumentar_repulsao;
+  #endif
 };
 
 #endif

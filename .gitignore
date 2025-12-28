@@ -1,0 +1,4 @@
+*.so
+*.world
+*.o
+createScenario

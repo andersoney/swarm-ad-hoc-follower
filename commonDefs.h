@@ -37,7 +37,7 @@ typedef enum _Algorithms{
 #define GOING_ADHOC_COLOR       Color(      0.7,      0.7,      0.7) //light grey
 #define END_ADHOC_COLOR         Color(      0.2,      0.2,      0.2) //dark grey
 #define GOING_OUT_COLOR         Color(        1,      0.7,        0) //dark yellow
-
+#define mudancas2
 
 
 #endif
