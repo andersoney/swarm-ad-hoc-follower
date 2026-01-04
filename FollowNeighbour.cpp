@@ -55,7 +55,7 @@ void FollowNeighbour::checkNeighbourhoodAndFollow()
       , fv
     #endif
     );
-    SQF::obstaclesRepulsionForces(newfx, newfy, &mean_distance, &var_distance, n_distances, laser, finished, m_state, m_x, m_y, m_th, destinationX, destinationY
+    SQF::obstaclesRepulsionForces(m_id,newfx, newfy, &mean_distance, &var_distance, n_distances, laser, finished, m_state, m_x, m_y, m_th, destinationX, destinationY
     #ifdef DEBUG_FORCES
     , fv
     #endif

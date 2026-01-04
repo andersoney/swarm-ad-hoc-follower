@@ -12,7 +12,10 @@ void SQF::init(int id)
 {
   Robot::init(id);
   m_state = GOING;
-  pos->SetColor(GOING_COLOR);
+  if (id == 1)
+    pos->SetColor(DEBUG_COLOR);
+  else
+    pos->SetColor(GOING_COLOR);
 }
 
 // Calculate rotation force field for entering
@@ -83,7 +86,7 @@ void SQF::mainLoop()
                                fv
 #endif
   );
-  SQF::obstaclesRepulsionForces(fx, fy, &mean_distance, &var_distance, n_distances, laser, finished, m_state, m_x, m_y, m_th, destinationX, destinationY
+  SQF::obstaclesRepulsionForces(m_id, fx, fy, &mean_distance, &var_distance, n_distances, laser, finished, m_state, m_x, m_y, m_th, destinationX, destinationY
 #ifdef DEBUG_FORCES
                                 ,
                                 fv
@@ -151,17 +154,15 @@ void SQF::calculateStateDependentForce(double &fx, double &fy, States &m_state, 
 }
 
 // Alters the values of fx and fy, adding repulsion force. Also, it updates the mean and variance of distances between robots sensed by laser ranges.
-void SQF::obstaclesRepulsionForces(double &fx, double &fy, double *mean_distance, double *var_distance, unsigned long &n_distances, ModelRanger *laser, bool finished, States m_state, double m_x, double m_y, double m_th, double destinationX, double destinationY
+void SQF::obstaclesRepulsionForces(unsigned int m_id, double &fx, double &fy, double *mean_distance, double *var_distance, unsigned long &n_distances, ModelRanger *laser, bool finished, States m_state, double m_x, double m_y, double m_th, double destinationX, double destinationY
 #ifdef DEBUG_FORCES
                                    ,
                                    ForceVisualizer &fv
 #endif
 )
 {
-#ifdef mudancas2
-  multiplicador_repulsao = 1;
-  // qtd_sem_aumentar_repulsao = 0;
-#endif
+  if (m_id == 1)
+    std::cout << "Calculating obstacle repulsion forces..." << std::endl;
   double distance;
   double dx = 0;
   double dy = 0;
@@ -188,20 +189,6 @@ void SQF::obstaclesRepulsionForces(double &fx, double &fy, double *mean_distance
   {
     influence = Imin + fabs(m_x - destinationX);
   }
-#ifdef mudancas2
-  if (min_distance < SECURITY_DIST)
-  {
-    multiplicador_repulsao += 0.1;
-  }
-  else
-  {
-    qtd_sem_aumentar_repulsao += 1;
-  }
-  if (qtd_sem_aumentar_repulsao > 4 && multiplicador_repulsao > 1)
-  {
-    multiplicador_repulsao -= 0.01;
-  }
-#endif
   for (uint i = 0; i < sample_count; i++)
   {
     distance = scan[i];
@@ -220,9 +207,16 @@ void SQF::obstaclesRepulsionForces(double &fx, double &fy, double *mean_distance
 
       dx = distance * cos(m_th + getBearing(i));
       dy = distance * sin(m_th + getBearing(i));
-
-      double _fx = -Kobs * multiplicador_repulsao * (1.0 / distance - 1.0 / influence) * (1.0 / pow((double)distance, 2)) * (dx / distance);
-      double _fy = -Kobs * multiplicador_repulsao * (1.0 / distance - 1.0 / influence) * (1.0 / pow((double)distance, 2)) * (dy / distance);
+      double _fx = -Kobs *
+#ifdef mudancas2
+                   SQF::multiplicador_repulsao *
+#endif
+                   (1.0 / distance - 1.0 / influence) * (1.0 / pow((double)distance, 2)) * (dx / distance);
+      double _fy = -Kobs *
+#ifdef mudancas2
+                   SQF::multiplicador_repulsao *
+#endif
+                   (1.0 / distance - 1.0 / influence) * (1.0 / pow((double)distance, 2)) * (dy / distance);
 
       fx += _fx;
       fy += _fy;
@@ -232,6 +226,51 @@ void SQF::obstaclesRepulsionForces(double &fx, double &fy, double *mean_distance
 #endif
     }
   }
+#ifdef mudancas2
+  if (m_id == 1)
+    std::cout << min_distance << "\t" << min_distance << "\t" << m_state << std::endl;
+  if (m_state == WAIT)
+  {
+
+    if (min_distance < SECURITY_DIST_ENTRANDO)
+    {
+      if (m_id == 1)
+        std::cout << "aumentando repulsao" << SQF::multiplicador_repulsao << std::endl;
+      SQF::multiplicador_repulsao += 0.1;
+      // std::cout << "aumentado repulsao para " << SQF::multiplicador_repulsao << std::endl;
+    }
+    else
+    {
+      SQF::qtd_sem_aumentar_repulsao += 1;
+    }
+    if (SQF::qtd_sem_aumentar_repulsao > 4 && SQF::multiplicador_repulsao > 1)
+    {
+      if (m_id == 1)
+        std::cout << "reduzindo repulsao" << SQF::multiplicador_repulsao << std::endl;
+      SQF::qtd_sem_aumentar_repulsao = 0;
+      SQF::multiplicador_repulsao -= 0.01;
+      if (m_id == 1)
+        std::cout << "reduzido repulsao para " << SQF::multiplicador_repulsao << std::endl;
+    }
+  }
+  else
+  {
+    SQF::multiplicador_repulsao = 1;
+  }
+  // else if (m_state == ENTERING_LINE1 || m_state == LEAVING_LINE2 || m_state == GOING_OUT)
+  // {
+  //   if (min_distance < SECURITY_DIST_SAINDO)
+  //   {
+  //     multiplicador_repulsao += 0.1;
+  //   }
+  //   else if (multiplicador_repulsao > 1)
+  //   {
+  //     multiplicador_repulsao -= 0.05;
+  //   }
+  // }
+  if (m_id == 1)
+    std::cout << "multiplicador_repulsao: " << SQF::multiplicador_repulsao << "\tmin_distance" << min_distance << "\tqtd_sem_aumentar_repulsao" << SQF::qtd_sem_aumentar_repulsao << std::endl;
+#endif
 
   if (!finished)
   {

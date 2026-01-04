@@ -27,7 +27,8 @@ const float Kexpoent2 = 1.1; //constant for the curved trajectory vector field g
 const unsigned long long FINISH_TIME = 100000; //Extra time to finish simulation;
 const unsigned long long maxTestTime = 600l*60*1000000; // 600 min converted to microseconds
 #ifdef mudancas2
-const float SECURITY_DIST= 1.0;
+const float SECURITY_DIST_ENTRANDO= 1.0;
+const float SECURITY_DIST_SAINDO= 1.5;
 #endif
 #define PI M_PI
 #endif

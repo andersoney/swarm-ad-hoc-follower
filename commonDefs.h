@@ -26,6 +26,7 @@ typedef enum _Algorithms{
 //define the colors used in simulation
 //Colors                                  R        G          B
 #define GOING_COLOR             Color(        1,        0,        0) //red
+#define DEBUG_COLOR             Color(        0,        0,        0) //red
 #define WAIT_COLOR              Color(        0,        1,        0) //green
 #define ENTERING_OUTSIDE_COLOR  Color(        0,        1,        1) //cyan
 #define ENTERING_LINE1_COLOR    Color(        0,        0,        1) //blue

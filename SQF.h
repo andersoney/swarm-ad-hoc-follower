@@ -30,7 +30,7 @@ class SQF : public Robot
     );
     
     //Alters the values of fx and fy, adding repulsion force. Also, it updates the mean and variance of distances between robots sensed by laser ranges.
-    static void obstaclesRepulsionForces(double &fx, double &fy, double* mean_distance, double* var_distance, unsigned long &n_distances, ModelRanger* laser, bool finished, States m_state, double m_x, double m_y, double m_th, double destinationX, double destinationY
+    static void obstaclesRepulsionForces(unsigned int m_id, double &fx, double &fy, double* mean_distance, double* var_distance, unsigned long &n_distances, ModelRanger* laser, bool finished, States m_state, double m_x, double m_y, double m_th, double destinationX, double destinationY
     #ifdef DEBUG_FORCES
       , ForceVisualizer& fv
     #endif
